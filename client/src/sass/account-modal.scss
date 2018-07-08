@@ -1,0 +1,31 @@
+.account-modal {
+
+    .account-modal-header {
+        background-color: red;
+        height: 200px;
+        width: 100%;
+        background-image: url('/assets/img/bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .key-wrapper {
+            border: 2px solid #fff;
+            height: 78px;
+            width: 78px;
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 1px 1px 1px rgba(0,0,0,.75);
+            color: white;
+            padding-top: 18px;
+
+            i {
+                font-size: 38px;
+            }
+        }
+
+        .key-text {
+            font-size: 20px;
+            color: white;
+        }
+    }
+}

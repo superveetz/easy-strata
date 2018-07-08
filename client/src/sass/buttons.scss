@@ -1,0 +1,27 @@
+.close-modal-btn {
+    background: none;
+    border: none;
+    color: grey;
+
+    :hover,
+    :focus,
+    :active {
+        color: darkgrey;
+    }
+}
+
+.close-modal-btn-dark {
+    background: none;
+    border: none;
+    color: black;
+
+    i {
+        color: black;
+    }
+
+    :hover,
+    :focus,
+    :active {
+        color: grey;
+    }
+}

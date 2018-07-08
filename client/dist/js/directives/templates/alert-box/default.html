@@ -1,0 +1,46 @@
+<div class='container-fluid mt-2 mb-2'>
+  <div class="card" 
+      ng-class="{
+        'border-danger':   AlertService.getAlert().type === 'error',
+        'border-success':  AlertService.getAlert().type === 'success'
+      }" 
+      role="alert" ng-if="AlertService.hasAlert()">
+    
+    <div class="card-header text-center"
+      ng-class="{
+        'text-danger':   AlertService.getAlert().type === 'error',
+        'text-success':  AlertService.getAlert().type === 'success'
+      }">
+      <span ng-if="AlertService.getAlert().type === 'error'">
+        <i class="fa fa-fw fa-exclamation"></i> Error: {{AlertService.getAlert().title}}
+      </span>
+
+      <span ng-if="AlertService.getAlert().type === 'success'">
+        <i class="fa fa-fw fa-check"></i> Success: {{AlertService.getAlert().title}}
+      </span>
+
+      <button ng-if="AlertService.getAlert().dismissable" 
+              type="button" 
+              class="close" 
+              aria-label="Close" 
+              ng-click="AlertService.hideAlert()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div ng-if="AlertService.getAlert().subHeader || AlertService.getAlert().text || AlertService.getAlert().errList" class="card-body">
+      <h6 class="card-title text-primary text-center"
+        ng-bind-html="AlertService.getAlert().subHeader">
+      </h6>
+
+      <p class="card-text text-secondary text-center" 
+        bind-html-compile="AlertService.getAlert().text">
+      </p> 
+
+      <ul ng-if="AlertService.getAlert().errList.length">
+        <li ng-repeat="error in AlertService.getErrorList()">{{error}}</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

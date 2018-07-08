@@ -1,0 +1,75 @@
+<section class='container'>
+    <h2 class="page-header">Forgot your password?</h2>
+
+    <p class="lead">
+        Don't worry. Resetting your password is easy, just tell us the email address associated
+        with your Easy Strata account and we'll email you a link to reset your password.
+    </p>
+
+    <alert-box></alert-box>
+
+    <form class="form" 
+        id="resetPassForm" 
+        name="resetPassForm"
+        ng-submit="resetPassForm.$valid && submitResetPassForm()"
+        ng-if="!passwordResetEmailSent"
+        novalidate>
+        <!-- Email -->
+        <div 
+            class="form-group" 
+            ng-class="{     
+                'has-error'     : resetPassForm.resetPassEmail.$invalid  && resetPassForm.$submitted    || serverResponse.signUpErr,
+                'has-success'   : resetPassForm.resetPassEmail.$valid    && resetPassForm.$submitted    && !serverResponse.signUpErr,
+                'has-feedback'  : resetPassForm.resetPassEmail.$invalid  || resetPassForm.resetPassEmail.$valid
+            }">
+            <label class="control-label sr-only" for="user">Email</label>
+            <div class="col-sm-12">
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-fw fa-envelope"></i>
+                        </span>
+                    </div>
+
+                    <input 
+                        type="email" 
+                        class="form-control" 
+                        id="resetPassEmail" 
+                        name="resetPassEmail" 
+                        placeholder="Email" 
+                        ng-model="resetPass.email"
+                        ng-keyup="serverResponse.signUpErr = false"
+                        required>
+                </div>
+
+                <span 
+                    ng-if="(resetPassForm.resetPassEmail.$touched || resetPassForm.$submitted) && resetPassForm.resetPassEmail.$valid && !serverResponse.loginErr" 
+                    class="glyphicon glyphicon-ok darkgreen form-control-feedback" 
+                    aria-hidden="true">
+                </span>
+
+                <span 
+                    ng-if="(resetPassForm.resetPassEmail.$touched || resetPassForm.$submitted) && resetPassForm.resetPassEmail.$invalid || serverResponse.loginErr" 
+                    class="glyphicon glyphicon-remove darkred form-control-feedback" 
+                    aria-hidden="true">
+                </span>
+
+                <p ng-if="resetPassForm.$submitted && resetPassForm.resetPassEmail.$error.email" class="form-text text-danger">Email address is badly formatted</p>
+                <p ng-if="resetPassForm.$submitted && resetPassForm.resetPassEmail.$error.required" class="form-text text-danger">Required</p>
+            </div><!-- end col -->
+        </div>
+
+        <div class='container-fluid'>
+            <button 
+                class="btn btn-outline-primary btn-block btn-lg" 
+                form="resetPassForm" 
+                type="submit" 
+                ng-disabled="resetPassFormSubmit">
+                <span ng-if="!resetPassFormSubmit"><i class="fa fa-paper-plane fa-fw"></i></span>
+                <span ng-if="resetPassFormSubmit"><i class="fa fa-spin fa-spinner"></i></span>
+                &nbsp;Email Password Reset
+            </button>
+        </div>
+    </form>
+</section>

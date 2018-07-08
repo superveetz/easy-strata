@@ -1,0 +1,42 @@
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
+.navbar-brand-wrap {
+    display: inline;
+    margin-right: 60px;
+    position: relative;
+
+    .navbar-brand-clipped {
+        position: absolute;
+        top: -15px;
+        clip: rect(0px,60px,60px,0px);
+    }
+}
+
+.nav-link.active {
+    background-color: red;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.mt-6 {
+    margin-top: 60px;
+}
+
+.mt-7 {
+    margin-top: 70px;
+}
+
+.mt-8 {
+    margin-top: 80px;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.open-account-modal-link {
+    font-size: 24px;
+}

@@ -1,0 +1,24 @@
+<div id="main-nav">
+    
+    <main-nav-links side-nav-links="sideNavLinks" elem-id="side-nav-links" elem-classes=""></main-nav-links>
+    
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" 
+                ui-sref="app.home">
+                <div class='navbar-brand-wrap'>
+                    <img class='navbar-brand-clipped' src="/assets/img/logo.png" width="60" height="60" alt="">
+                </div> Easy Strata
+            </a> 
+    
+            <button ng-click="toggleSideNav()" 
+                aria-controls="side-nav-links" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <main-nav-links elem-id="top-nav-links" elem-classes="collapse navbar-collapse"></main-nav-links>
+            
+        </div>
+    </nav>
+    
+</div>

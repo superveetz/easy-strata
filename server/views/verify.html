@@ -1,0 +1,41 @@
+<html>
+    <body style='font-family: Helvetica, Arial, sans-serif;'>
+        <p style='font-size: 18px;'>
+            Greetings <%= name %>,
+        </p>
+        <p style='font-size: 16px;'>
+            Welcome to Easy Strata (https://easystrata.com)! Someone (hopefully you) registered this email address with their account. If you did make this request, please ignore this email. Otherwise, follow the link below to verify your email address and activate your account:
+        </p>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                    <td align="center" style="border-radius: 3px;" bgcolor="#e9703e">
+                        <a href="<%= text %>" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 12px 18px; border: 1px solid #e9703e; display: inline-block;">Activate Account &rarr;</a>
+                    </td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <p>
+            <em style='font-size: 18px;'>Sincerely,</em>
+            <br>
+            <br>
+            <em style='font-size: 14px;'>
+                The Easy Strata Team,<br>
+                7415 Shaw Ave,<br>
+                Chilliwack, BC,<br>
+                V2R 3C1<br>
+            </em>
+            <img alt='Logo' src="<%= logo %>" width="60" height="60">
+        </p>
+        
+        <p>
+            <em style="color: grey; font-size: 10px;">If you are experiencing a problem with the button above, try copy and pasting this link into your browser's address bar: <%= text %></em>
+        </p>
+
+    </body>
+</html>

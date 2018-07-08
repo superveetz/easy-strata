@@ -1,0 +1,123 @@
+<section class='container pl-4 pr-4'>
+        <h2 class="page-header">Reset Password</h2>
+    
+        <p class="lead" ng-if"!passResetFormSucc">
+            Please provide a new password for your Easy Strata account:
+        </p>
+
+        <alert-box></alert-box>
+    
+        <form class="form" 
+            id="passResetForm" 
+            name="passResetForm"
+            ng-submit="passResetForm.$valid && submitpassResetForm()"
+            ng-if="!passResetFormSucc"
+            novalidate>
+
+            <!-- Password -->
+            <div 
+                class="form-group" 
+                ng-class="{ 
+                    'has-error'     : passResetForm.newPass.$invalid   && passResetForm.$submitted    || serverResponse.signUpErr,
+                    'has-success'   : passResetForm.newPass.$valid     && passResetForm.$submitted    && !serverResponse.signUpErr,
+                    'has-feedback'  : passResetForm.newPass.$invalid   || passResetForm.newPass.$valid
+                }">
+                <label class="control-label sr-only" for="newPass">Password</label>
+                <div class="col-sm-12">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-fw fa-key"></i>
+                            </span>
+                        </div>
+
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="newPass" 
+                            name="newPass" 
+                            placeholder="Password" 
+                            ng-model="passReset.pass"
+                            ng-minlength="8"
+                            required>
+                    </div>
+
+                    <span 
+                        ng-if="(passResetForm.newPass.$touched || passResetForm.$submitted) && passResetForm.newPass.$valid && !serverResponse.signUpErr" 
+                        class="glyphicon glyphicon-ok darkgreen form-control-feedback" 
+                        aria-hidden="true">
+                    </span>
+
+                    <span 
+                        ng-if="(passResetForm.newPass.$touched || passResetForm.$submitted) && passResetForm.newPass.$invalid || serverResponse.signUpErr" 
+                        class="glyphicon glyphicon-remove darkred form-control-feedback" 
+                        aria-hidden="true">
+                    </span>
+
+                    <span ng-if="passResetForm.$submitted && passResetForm.newPass.$error.required" class="form-text text-danger">Required</span>
+                    <span ng-if="passResetForm.$submitted && passResetForm.newPass.$error.minlength" class="form-text text-danger">Too short</span>
+                </div><!-- end col -->
+            </div>
+
+            <div 
+                class="form-group" 
+                ng-class="{ 
+                    'has-error'     : passResetForm.newCPass.$invalid   && passResetForm.$submitted    || serverResponse.signUpErr,
+                    'has-success'   : passResetForm.newCPass.$valid     && passResetForm.$submitted    && !serverResponse.signUpErr,
+                    'has-feedback'  : passResetForm.newCPass.$invalid   || passResetForm.newCPass.$valid
+                }">
+                <label class="control-label sr-only" for="newCPass">Confirm</label>
+                <div class="col-sm-12">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-fw fa-lock"></i>
+                            </span>
+                        </div>
+
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="newCPass" 
+                            name="newCPass" 
+                            placeholder="Confirm Password" 
+                            ng-model="passReset.cpass"
+                            ui-validate="{ passConfirmed: isPassConfirmed }"
+                            ng-minlength="8"
+                            required>
+                    </div>
+
+                    <span 
+                        ng-if="(passResetForm.newCPass.$touched || passResetForm.$submitted) && passResetForm.newCPass.$valid && !serverResponse.signUpErr" 
+                        class="glyphicon glyphicon-ok darkgreen form-control-feedback" 
+                        aria-hidden="true">
+                    </span>
+
+                    <span 
+                        ng-if="(passResetForm.newCPass.$touched || passResetForm.$submitted) && passResetForm.newCPass.$invalid || serverResponse.signUpErr" 
+                        class="glyphicon glyphicon-remove darkred form-control-feedback" 
+                        aria-hidden="true">
+                    </span>
+
+                    <span ng-if="passResetForm.$submitted && passResetForm.newCPass.$error.required" class="form-text text-danger">Required</span>
+                    <span ng-if="passResetForm.$submitted && passResetForm.newCPass.$error.minlength" class="form-text text-danger">Too short</span>
+                    <span ng-if="passResetForm.$submitted && passResetForm.newCPass.$error.passConfirmed" class="form-text text-danger">Must match password</span>
+                </div><!-- end col -->
+            </div>
+            <!-- /End Confirm Pass -->
+    
+            <div class='container-fluid'>
+                <button 
+                    class="btn btn-outline-primary btn-block btn-lg" 
+                    form="passResetForm" 
+                    type="submit" 
+                    ng-disabled="passResetFormSubmit">
+                    <span ng-if="!passResetFormSubmit"><i class="fa fa-check fa-fw"></i></span>
+                    <span ng-if="passResetFormSubmit"><i class="fa fa-spin fa-spinner"></i></span>
+                    &nbsp;Reset Password
+                </button>
+            </div>
+        </form>
+    </section>
