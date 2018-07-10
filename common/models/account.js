@@ -7,7 +7,11 @@ module.exports = function(Account) {
     //send verification email after registration
     Account.afterRemote('create', function(context, accInstance, next) {
         console.log('> user.afterRemote triggered');
-
+        console.log("config.hostname:", config.hostname);
+        console.log('https://' + config.hostname + '/assets/img/logo-text.jpg');
+        
+        
+        
         var options = {
             type: 'email',
             to: accInstance.email,
@@ -16,7 +20,7 @@ module.exports = function(Account) {
             template: path.resolve(__dirname, '../../server/views/verify.html'),
             host: process.env.NODE_ENV == 'production' ? config.hostname : 'localhost',
             port: process.env.NODE_ENV == 'production' ? 80 : config.devServerPort,
-            logo: process.env.NODE_ENV == 'production' ? 'http://' + config.hostName + '/assets/img/logo-text.jpg' : 'http://via.placeholder.com/120x120',
+            logo: 'https://' + config.hostname + '/assets/img/logo-text.jpg',
             text: '{href}',
             name: accInstance.firstName + ' ' + accInstance.lastName,
             redirect: '/verified',
