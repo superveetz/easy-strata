@@ -8,14 +8,16 @@
 
         <div class="pt-5">
             <div class="key-wrapper text-center">
-                <i ng-show="activeTab == 'sign-up'" class="fa fa-fw fa-user-plus"></i>
-                <i ng-show="activeTab == 'login'" class="fa fa-fw fa-sign-in"></i>
+                <i class="fa fa-fw"
+                    ng-class="{
+                        'fa-user-plus': activeTab == 'sign-up',
+                        'fa-sign-in': activeTab == 'login'
+                    }"></i>
             </div>
         </div>
 
         <h3 class="key-text text-center">
-            <span ng-show="activeTab == 'sign-up'">Sign Up</span>
-            <span ng-show="activeTab == 'login'">Login</span>
+            <span>{{activeTab == 'login' ? 'Login' : 'Sign Up'}}</span>
         </h3>
     </div>  
     <uib-tabset justified="true" active="active" class="pb-3">
