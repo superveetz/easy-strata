@@ -65,7 +65,6 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.MainNavService = MainNavService;
         $scope.authDDToggled = false;
         $scope.screenIsMobile = screenSize.is('xs, sm');
-        console.log('main nav links ctrl');
         
 
         // init sideNavLinks for parent ctrl
@@ -110,9 +109,14 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             event.preventDefault();
             event.stopImmediatePropagation();
 
-            $rootScope.$emit('close-side-nav');
-
             // allow 300 ms for the side-nav to close before opening modal
+            let timeoutDuration = 0;
+            
+            if ($scope.$parent.navToggled) {
+                timeoutDuration = 300;
+            }
+            
+            $rootScope.$emit('close-side-nav');
             $timeout(() => {
                 ModalService.openAccountModal({
                     animation: true,
@@ -121,7 +125,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
                     backdrop: true,
                     size: 'md'
                 });
-            }, 300);
+            }, timeoutDuration);
         };
 
         $scope.toggleAuthenicatedDropdown = function() {
