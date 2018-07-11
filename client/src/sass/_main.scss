@@ -3,6 +3,9 @@ $fa-font-path: "~font-awesome/fonts";
 
 body {
     overflow-x: hidden;
+    &.modal-open {
+        overflow: hidden;
+    }
 }
 
 .navbar-brand-wrap {
