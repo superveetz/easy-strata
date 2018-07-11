@@ -38,6 +38,7 @@ import './sass/_main.scss';
 import './sass/buttons.scss';
 import './sass/main-nav.scss';
 import './sass/account-modal.scss';
+import './sass/pricing.scss';
 
 const appname = 'app';  /** App and root module name */
 const deps    = [ /** All global dependencies */

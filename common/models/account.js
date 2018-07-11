@@ -4,33 +4,32 @@ const path      = require('path');
 const config    = require('../../server/config.json');
 
 module.exports = function(Account) {
+        
+    var verifyEmailOptions = {
+        type: 'email',
+        to: '',
+        from: 'Easy Strata <accounts@easystrata.com>',
+        subject: "Verify your email address to activate your account",
+        template: path.resolve(__dirname, '../../server/views/verify.html'),
+        host: process.env.NODE_ENV == 'production' ? config.hostname : 'localhost',
+        port: process.env.NODE_ENV == 'production' ? 80 : config.devServerPort,
+        logo: 'https://' + config.hostname + '/assets/img/logo-text.jpg',
+        text: '{href}',
+        name: '',
+        redirect: '/verified',
+        Account: Account
+    };
+
     //send verification email after registration
     Account.afterRemote('create', function(context, accInstance, next) {
         console.log('> user.afterRemote triggered');
-        console.log("config.hostname:", config.hostname);
-        console.log('https://' + config.hostname + '/assets/img/logo-text.jpg');
-        
-        
-        
-        var options = {
-            type: 'email',
-            to: accInstance.email,
-            from: 'Easy Strata <noreply@easystrata.com>',
-            subject: "Verify your email address to activate your account",
-            template: path.resolve(__dirname, '../../server/views/verify.html'),
-            host: process.env.NODE_ENV == 'production' ? config.hostname : 'localhost',
-            port: process.env.NODE_ENV == 'production' ? 80 : config.devServerPort,
-            logo: 'https://' + config.hostname + '/assets/img/logo-text.jpg',
-            text: '{href}',
-            name: accInstance.firstName + ' ' + accInstance.lastName,
-            redirect: '/verified',
-            Account: Account
-        };
 
-        console.log("options.logo:", options.logo);
+        console.log("verifyEmailOptions.logo:", verifyEmailOptions.logo);
         
+        verifyEmailOptions.to = accInstance.email;
+        verifyEmailOptions.name = accInstance.firstName + accInstance.lastName;
 
-        accInstance.verify(options, function(err, response) {
+        accInstance.verify(verifyEmailOptions, function(err, response) {
             console.log('err: ', err);
             if (err) return next(err);
 
@@ -99,7 +98,7 @@ module.exports = function(Account) {
         // send email
         Account.app.models.Email.send({
             to: info.email,
-            from: 'Easy Strata <noreply@easystrata.com>',
+            from: 'Easy Strata <accounts@easystrata.com>',
             subject: 'Password Reset',
             html: html
         }, function(err) {
@@ -107,6 +106,40 @@ module.exports = function(Account) {
             console.log('> sending password reset email to:', info.email);
         });
     });
+
+    Account.resendAccountActivationEmail = function(emailToVerify, cb) {
+        if (!emailToVerify || !emailToVerify) {
+            // bad params
+            return cb(false);
+        }
+        
+        Account.findOne({
+            where: {
+                email: emailToVerify,
+                emailVerified: {
+                    "neq": true
+                }
+            }
+        }, (err, accInst) => {
+            console.log("err:", err);
+            
+            if (err || !accInst) {
+                console.log('return false');
+                
+                return cb(false);
+            }
+
+            verifyEmailOptions.to = accInst.emailToVerify;
+            verifyEmailOptions.name = accInst.firstName + accInst.lastName;
+
+            accInst.verify(verifyEmailOptions, function(err, response) {
+                if (err) return cb(false);
+
+                console.log('> verification email sent:', response);
+                return cb(null, true);
+            });
+        });
+    };
 
     Account.resetPasswordConfirm = function(accessToken, newPassword, cb) {
         // console.log("Account.app.models.AccessToken:", Account.app.models.AccessToken.findById);
@@ -145,6 +178,18 @@ module.exports = function(Account) {
             
         });
     };
+
+    Account.remoteMethod(
+        'resendAccountActivationEmail',
+        {
+            description: "Allows an unauthenticated account to resend its activation email.",
+            http: {verb: 'post'},
+            accepts: [
+                {arg: 'email', type: 'string', required: true, description: "The email address of the account to verify"}
+            ],
+            returns: {arg: 'emailSent', type: 'boolean'}
+        }
+    );
 
     Account.remoteMethod(
         'resetPasswordConfirm',

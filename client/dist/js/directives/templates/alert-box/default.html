@@ -6,7 +6,7 @@
       }" 
       role="alert" ng-if="AlertService.hasAlert()">
     
-    <div class="card-header text-center"
+    <div class="card-header text-left"
       ng-class="{
         'text-danger':   AlertService.getAlert().type === 'error',
         'text-success':  AlertService.getAlert().type === 'success'
@@ -29,11 +29,11 @@
     </div>
 
     <div ng-if="AlertService.getAlert().subHeader || AlertService.getAlert().text || AlertService.getAlert().errList" class="card-body">
-      <h6 class="card-title text-primary text-center"
+      <h6 class="card-title text-primary text-left"
         ng-bind-html="AlertService.getAlert().subHeader">
       </h6>
 
-      <p class="card-text text-secondary text-center" 
+      <p class="card-text text-secondary text-left" 
         bind-html-compile="AlertService.getAlert().text">
       </p> 
 

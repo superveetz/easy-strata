@@ -1240,6 +1240,43 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Account#resendAccountActivationEmail
+             * @methodOf lbServices.Account
+             *
+             * @description
+             *
+             * Allows an unauthenticated account to resend its activation email.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `email` – `{string}` - The email address of the account to verify
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `emailSent` – `{boolean=}` -
+             */
+            "resendAccountActivationEmail": {
+              url: urlBase + "/Accounts/resendAccountActivationEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Account#resetPasswordConfirm
              * @methodOf lbServices.Account
              *

@@ -17,6 +17,10 @@ $fa-font-path: "~font-awesome/fonts";
     background-color: red;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 a:hover {
     cursor: pointer;
 }

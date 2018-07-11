@@ -286,21 +286,11 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.resetPass = {
             email: ''
         };
-        console.log("Account.isAuthenticated():", Account.isAuthenticated());
-        Account.getCurrent()
-        .$promise
-        .then(succ => {
-            console.log("succ:", succ);
-            
-        })
-        .catch(err => {
-            console.log("err:", err);
-            
-        });
-        
-        
 
         $scope.passwordResetEmailSent = false;
+        $scope.form = {
+            resetPassForm: {}
+        };
 
         $scope.submitResetPassForm = function () {
             $scope.resetPassFormSubmit = true;
@@ -318,12 +308,66 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
                     dismissable: false,
                     title: 'Email Sent',
                     subHeader: "Your Password Reset Email Is On Its Way",
-                    text: "If the email does not arrive within a minute or two, please check your junk/other folders to ensure that it wasn't forwarded there. Otherwise, use the following link to <a class='text-primary' ng-click='submitResetPassForm()'>resend</a> your password reset email."
+                    text: "We've sent an email to <b>{{resetPass.email}}</b> with a link to reset your password. If the email does not arrive within a minute or two, please check your junk/other folders to ensure that it wasn't forwarded there. Otherwise, please use the following link to <a class='text-primary' ng-click='submitResetPassForm()'>resend</a> your password reset email."
                 });
             })
             .catch(function(err) {
+                console.log("err:", err);
+                
+                // handle 404 if email does not exist
+                if (err && err.status == 404) {
+                    AlertService.setAlert({
+                        show: true,
+                        type: 'error',
+                        dismissable: false,
+                        title: 'Email Address Does Not Exist',
+                        subHeader: "No Account Matching The Specified Email Address",
+                        text: "The provided email address <b>{{resetPass.email}}</b> could not be associated with any account. This means that you should be able to <a class='text-primary' ui-sref='app.login'>create a new account</a> using this email address."
+                    });
+                }
+
+                // handle 401 if account email is not verified
+                if (err && err.status == 401) {
+                    AlertService.setAlert({
+                        show: true,
+                        type: 'error',
+                        dismissable: false,
+                        title: 'Email Address Not Verified',
+                        subHeader: "Verify Your Email Address To Reset Your Password",
+                        text: "We found an account associated with <b>{{resetPass.email}}</b>, but this email address has not yet been verified. Please use the following link to <a class='text-primary' ng-click='resendActivationEmail()'>resend</a> your account activation email. When you are done, you should be able to log in, otherwise, return here to reset your password."
+                    });
+                }
                 $scope.resetPassFormSubmit = false;
             });
+
+            $scope.resendActivationEmail = function() {
+                if (!$scope.form.resetPassForm.$valid) {
+                    return;
+                };
+
+                $scope.resetPassFormSubmit = true;                
+
+                Account.resendAccountActivationEmail({
+                    email: $scope.resetPass.email
+                })
+                .$promise
+                .then(succ => {
+                    $scope.resetPassFormSubmit = false;
+                    $scope.passwordResetEmailSent = true;
+                    AlertService.setAlert({
+                        show: true,
+                        type: 'success',
+                        dismissable: false,
+                        title: 'Email Sent',
+                        subHeader: "Your Account Activation Email Is On Its Way",
+                        text: "We've sent an email to <b>{{resetPass.email}}</b> with a link to activate your account. We need you to verify your email address so that we know it is valid and that it belongs to you. When you are done, you should be able to log in, otherwise, return here to reset your password."
+                    });
+                })
+                .catch(err => {
+                    console.log("err:", err);
+                    $scope.resetPassFormSubmit = false;
+                });
+            };
         };
     }])
 
