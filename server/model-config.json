@@ -43,5 +43,9 @@
     "dataSource": "MongoDs",
     "public": true,
     "options": {}
+  },
+  "Strata": {
+    "dataSource": "MongoDs",
+    "public": true
   }
 }

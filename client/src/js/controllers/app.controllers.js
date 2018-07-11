@@ -29,14 +29,12 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         });
 
         // toggle side nav
-        $scope.toggleSideNav        = function() {
-            if ($scope.navToggled) {
-                $scope.navToggled       = !$scope.navToggled;
-                $scope.sideNavLinks.removeClass('show');
-            } else {
-                $scope.navToggled       = !$scope.navToggled;
-                $scope.sideNavLinks.addClass('show');
-            }
+        $scope.toggleSideNav        = function(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            $scope.navToggled       = !$scope.navToggled;
+            angular.element("#wrapper").toggleClass("toggled");
         };
 
         // manually open/close side nav
@@ -44,13 +42,13 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             if (action == 'open') {
                 if (!$scope.navToggled) {
                     $scope.navToggled       = !$scope.navToggled;
-                    $scope.sideNavLinks.addClass('show');
+                    angular.element("#wrapper").addClass("toggled");
                 }
                 return true;
             } else if (action == 'close') {
                 if ($scope.navToggled) {
                     $scope.navToggled       = !$scope.navToggled;
-                    $scope.sideNavLinks.removeClass('show');
+                    angular.element("#wrapper").removeClass("toggled");
                 }
                 return true;
             }
@@ -67,6 +65,8 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.MainNavService = MainNavService;
         $scope.authDDToggled = false;
         $scope.screenIsMobile = screenSize.is('xs, sm');
+        console.log('main nav links ctrl');
+        
 
         // init sideNavLinks for parent ctrl
         if ($scope.elemId == 'side-nav-links') {
@@ -105,16 +105,23 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.hideDissmissable = true;
 
         //open account modal
-        $scope.openAccountModal     = function() {
+        $scope.openAccountModal     = function(event) {
+            
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
             $rootScope.$emit('close-side-nav');
 
-            ModalService.openAccountModal({
-                animation: true,
-                ariaLabelledBy: 'Login or Register a New Account',
-                ariaDescribedBy: 'Select one of the tabs and provide your credentials to create a new account or login',
-                backdrop: true,
-                size: 'md'
-            });
+            // allow 300 ms for the side-nav to close before opening modal
+            $timeout(() => {
+                ModalService.openAccountModal({
+                    animation: true,
+                    ariaLabelledBy: 'Login or Register a New Account',
+                    ariaDescribedBy: 'Select one of the tabs and provide your credentials to create a new account or login',
+                    backdrop: true,
+                    size: 'md'
+                });
+            }, 300);
         };
 
         $scope.toggleAuthenicatedDropdown = function() {

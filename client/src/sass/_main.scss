@@ -1,6 +1,10 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
 
+body {
+    overflow-x: hidden;
+}
+
 .navbar-brand-wrap {
     display: inline;
     margin-right: 60px;

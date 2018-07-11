@@ -1,0 +1,40 @@
+{
+  "name": "Strata",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Address": {
+      "type": "string",
+      "required": true
+    },
+    "City": {
+      "type": "string",
+      "required": true
+    },
+    "Country": {
+      "type": "string",
+      "required": true
+    },
+    "ProvState": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "accountOwner": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -133,9 +133,9 @@
                     name: 'Account',
                     state: null,
                     html: `
-                        <li class="nav-item pb-2" 
+                        <li class="nav-item pb-2 text-center" 
                             ng-if="!Account.isAuthenticated()">
-                            <a class="align-middle open-account-modal-link" ng-click="openAccountModal()">
+                            <a class="align-middle open-account-modal-link" ng-click="openAccountModal($event)">
                                 <span class="badge badge-primary">
                                     <i class="fa fa-user"></i> &nbsp;Account
                                 </span>

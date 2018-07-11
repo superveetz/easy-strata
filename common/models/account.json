@@ -23,6 +23,11 @@
   },
   "validations": [],
   "relations": {
+    "stratas": {
+      "type": "hasMany",
+      "model": "Strata",
+      "foreignKey": "accountOwnerId"
+    }
   },
   "acls": [
     {
@@ -30,11 +35,10 @@
       "principalId": "$everyone",
       "permission": "DENY"
     },
-    
     {
+      "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "accessType": "READ",
       "permission": "ALLOW"
     },
     {

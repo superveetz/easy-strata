@@ -39,14 +39,10 @@
             restrict: 'E',
             replace: true,
             scope: {
-                sideNavLinks: '=',
                 elemId: '@elemId',
-                elemClasses: '@elemClasses'
             },
             controller: 'MainNavLinksCtrl',
             templateUrl: function(elem, attr) {
-                console.log("elem:", elem);
-                console.log("attr:", attr);
                 if (!attr.templateName) {
                     return require('./templates/main-nav-links/main-nav-links.html')
                 } else {

@@ -1,27 +1,9 @@
-#side-nav-links {
-    float: left;
-    transition: 400ms;
-    margin-left: -242px;
-    position: absolute;
-    z-index: 9999;
-    background-color: white;
-    min-height: 100vh;
-    border: 1px solid black;
-    &.show {
-        margin-left: 0px;
-    }
-
-    ul {
-        text-align: center;
-        min-width: 240px;
-        
-        li:first-child {
-            border-bottom: 1px solid black;
-        }
-
-        li {
-            border-top: 0px;
-            border-bottom: 1px solid black;
+#main-nav {
+    #sidebar-wrapper {
+        .sidebar-nav {
+            .nav-link {
+                
+            }
         }
     }
 }
