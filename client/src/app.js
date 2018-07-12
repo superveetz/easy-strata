@@ -30,7 +30,14 @@ import lbServices           from './js/services/lb-services';
 
 // vendor css
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-// import '../../node_modules/font-awesome/css/font-awesome.css';
+import fontawesome from '@fortawesome/fontawesome'
+import regular from '@fortawesome/fontawesome-free-regular'
+import solid from '@fortawesome/fontawesome-free-solid'
+import brands from '@fortawesome/fontawesome-free-brands'
+
+fontawesome.library.add(regular)
+fontawesome.library.add(solid)
+fontawesome.library.add(brands)
 import '../../node_modules/animate.css/animate.css';
 
 // sass

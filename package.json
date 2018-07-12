@@ -40,6 +40,10 @@
     "ui-bootstrap4": "^3.0.3"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "angularjs-template-loader": "^0.1.1",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
@@ -55,6 +59,7 @@
     "eslint-config-loopback": "^8.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
+    "font-awesome-sass-loader": "^2.0.1",
     "grunt": "^1.0.3",
     "grunt-docular": "0.1.2",
     "grunt-loopback-sdk-angular": "1.2.0",

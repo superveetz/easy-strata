@@ -128,7 +128,9 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             }, timeoutDuration);
         };
 
-        $scope.toggleAuthenicatedDropdown = function() {
+        $scope.toggleAuthenicatedDropdown = function(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
             $scope.authDDToggled = !$scope.authDDToggled;
         };
 
@@ -143,7 +145,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             });
         };
 
-        screenSize.on('xs, sm', (isMatch) => {
+        screenSize.on('xs', (isMatch) => {
             // if was mobile and now desktop, close side nav
             if ($scope.screenIsMobile && !isMatch) {
                 $rootScope.$emit('close-side-nav');
@@ -188,12 +190,12 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.activeTab = 'login';
 
         // flag to hide dissmissable btn
-        if ($state.includes('login')) {
+        if ($state.includes('app.login')) {
             $scope.hideDissmissable = true;
         } else {
             $scope.hideDissmissable = false;
         }
-
+        
         // toggle active tab variable
         $scope.setActiveTab = function (activeTab) {
             $scope.activeTab = activeTab;

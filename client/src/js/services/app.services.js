@@ -58,9 +58,11 @@
                             <a class='nav-link text-dark' ui-sref='app.home'>
                                 <div class='row'>
                                     <div class='col-2 offset-2 text-right'>
-                                        <span class='fa-stack fa-md'>
-                                            <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                            <i style='margin-top: -1px;' class='fa fa-fw fa-home fa-stack-1x'></i>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-home fa-stack-1x'></i>
                                         </span>
                                     </div>
                                     <div class='col col-auto text-left'>
@@ -86,9 +88,11 @@
                                 <a class='nav-link text-dark' ui-sref='app.services'>
                                     <div class='row'>
                                         <div class='col-2 offset-2 text-right'>
-                                            <span class='fa-stack fa-sm'>
-                                                <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                <i style='margin-top: -1px;' class='fa fa-fw fa-cog fa-stack-1x'></i>
+                                            <span class='fa-stack fa-1x' ng-class="{
+                                                'mt-1-3': screenIsMobile
+                                            }">
+                                                <i class="far fa-square fa-stack-2x"></i>
+                                                <i class='fas fa-fw fa-cog fa-stack-1x'></i>
                                             </span>
                                         </div>
                                         <div class='col col-auto text-left'>
@@ -114,9 +118,11 @@
                             <a class='nav-link text-dark' ui-sref='app.pricing'>
                                 <div class='row'>
                                     <div class='col-2 offset-2 text-right'>
-                                        <span class='fa-stack fa-md'>
-                                            <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                            <i style='margin-top: -1px;' class='fa fa-fw fa-dollar fa-stack-1x'></i>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-dollar-sign fa-stack-1x'></i>
                                         </span>
                                     </div>
                                     <div class='col col-auto text-left'>
@@ -133,20 +139,30 @@
                     name: 'Account',
                     state: null,
                     html: `
-                        <li class="nav-item pb-2 text-center" 
-                            ng-if="!Account.isAuthenticated()">
-                            <a class="align-middle open-account-modal-link" ng-click="openAccountModal($event)">
-                                <span class="badge badge-primary">
-                                    <i class="fa fa-user"></i> &nbsp;Account
-                                </span>
-                            </a>
-                        </li>
+                        <li class="nav-item" 
+                            ng-class="{
+                                'active': $state.includes('app.login')
+                            }">
+                            <div class='container'>
+                                
+                                <!-- desktop and mobile unauthenticated -->
+                                <a class='nav-link text-dark' ui-sref='app.login' ng-if="!Account.isAuthenticated()">
+                                    <div class='row'>
+                                        <div class='col-2 offset-2 text-right'>
+                                            <span class='fa-stack fa-1x'>
+                                                <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                <i class='fas fa-fw fa-sign-in-alt fa-stack-1x'></i>
+                                            </span>
+                                        </div>
+                                        <div class='col col-auto text-left'>
+                                            <strong class='align-middle'>&nbsp;Login</strong>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- /end desktop and mobile unauthenticated -->
 
-                        <!-- desktop authenticated -->
-                        <div ng-if='!screenIsMobile'>
-                            <li class="nav-item" 
-                                ng-if="Account.isAuthenticated()">
-                                <div class="dropdown">
+                                <!-- desktop authenticated -->
+                                <div class="dropdown" ng-if='!screenIsMobile && Account.isAuthenticated()'>
 
                                     <a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
                                         class="nav-link text-dark" ng-click="toggleAuthenicatedDropdown()">
@@ -157,39 +173,57 @@
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" ui-sref="app.my-profile">
-                                            <span class='fa-stack fa-md'>
-                                                <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                <i style='margin-top: -1px;' class='fa fa-fw fa-user fa-stack-1x'></i>
-                                            </span> 
-                                            <strong class='align-middle'>My Profile</strong>
+                                            <div class='row'>
+                                                <div class='col-2 text-right'>
+                                                    <span class='fa-stack fa-1x'>
+                                                        <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                        <i class='fas fa-fw fa-user-edit fa-stack-1x'></i>
+                                                    </span> 
+                                                </div>
+                                                <div class='col col-auto text-left'>
+                                                <strong class='align-middle'>&nbsp;My Profile</strong>
+                                                </div>
+                                            </div>
                                         </a>
                                         <a class="dropdown-item" ui-sref="app.my-strata">
-                                            <span class='fa-stack fa-md'>
-                                                <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                <i style='margin-top: -1px;' class='fa fa-fw fa-users fa-stack-1x'></i>
-                                            </span> 
-                                            <strong class='align-middle'>My Strata</strong>
+                                            <div class='row'>
+                                                <div class='col-2 text-right'>
+                                                    <span class='fa-stack fa-1x'>
+                                                        <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                        <i class='far fa-fw fa-building fa-stack-1x'></i>
+                                                    </span> 
+                                                </div>
+                                                <div class='col col-auto text-left'>
+                                                <strong class='align-middle'>&nbsp;My Stratas</strong>
+                                                </div>
+                                            </div>
                                         </a>
                                         <div class='dropdown-divider'></div>
+                                        
                                         <a class="dropdown-item" ng-click="logout()">
-                                            <span class='fa-stack fa-md'>
-                                                <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                <i style='margin-top: -1px;' class='fa fa-fw fa-sign-out fa-stack-1x'></i>
-                                            </span> 
-                                            <strong class='align-middle'>Log Out</strong>
+                                            <div class='row'>
+                                                <div class='col-2 text-right'>
+                                                    <span class='fa-stack fa-1x'>
+                                                        <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                        <i class='fas fa-fw fa-sign-out-alt fa-stack-1x'></i>
+                                                    </span> 
+                                                </div>
+                                                <div class='col col-auto text-left'>
+                                                <strong class='align-middle'>&nbsp;Log Out</strong>
+                                                </div>
+                                            </div>
                                         </a>
                                     </div>
 
                                 </div>
-                            </li>
-                        </div>
-                        <!-- /end desktop authenticated -->
-
+                                <!-- /end desktop authentiated -->
+                            </div>
+                        </li>
+                                
                         <!-- mobile authenticated -->
-                        <div ng-if='screenIsMobile'>
-                            <li class="nav-item" 
-                                ng-if="Account.isAuthenticated()">
-                                <a class="nav-link text-dark" ng-click="toggleAuthenicatedDropdown()">
+                        <div ng-if='screenIsMobile && Account.isAuthenticated()'>
+                            <li class="nav-item text-center">
+                                <a class="nav-link text-dark" ng-click="toggleAuthenicatedDropdown($event)">
                                     <img class='rounded-circle' src='/assets/img/default-avatar.png' alt='Profile Image' height='60' width='60'>
                                     &nbsp; 
                                     {{$root.currentUser.firstName}} {{$root.currentUser.lastName}} <i class='fa fa-fw fa-caret-down'></i>
@@ -202,14 +236,14 @@
                                         
                                         <a class='nav-link text-dark' ui-sref='app.my-profile'>
                                             <div class='row'>
-                                                <div class='col-2 offset-2 text-right text-dark'>
-                                                    <span class='fa-stack fa-md'>
-                                                        <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                        <i style='margin-top: -1px;' class='fa fa-fw fa-user fa-stack-1x'></i>
-                                                    </span>
+                                                <div class='col-2 offset-2 text-right'>
+                                                    <span class='fa-stack fa-1x mt-1'>
+                                                        <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                        <i class='fas fa-fw fa-user-edit fa-stack-1x'></i>
+                                                    </span> 
                                                 </div>
-                                                <div class='col col-auto text-left text-dark'>
-                                                    <strong class='align-middle'>&nbsp;My Profile</strong>
+                                                <div class='col col-auto text-left'>
+                                                    <strong class='align-top'>&nbsp;My Profile</strong>
                                                 </div>
                                             </div>
                                         </a>
@@ -220,35 +254,35 @@
                                     
                                     <div class='container'>
                                         
-                                        <a class='nav-link text-dark' ui-sref='app.my-profile'>
-                                            <div class='row'>
-                                                <div class='col-2 offset-2 text-right text-dark'>
-                                                    <span class='fa-stack fa-md'>
-                                                        <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                        <i style='margin-top: -1px;' class='fa fa-fw fa-users fa-stack-1x'></i>
-                                                    </span>
-                                                </div>
-                                                <div class='col col-auto text-left text-dark'>
-                                                    <strong class='align-middle'>&nbsp;My Strata</strong>
-                                                </div>
+                                    <a class='nav-link text-dark' ui-sref='app.my-strata'>
+                                        <div class='row'>
+                                            <div class='col-2 offset-2 text-right'>
+                                                <span class='fa-stack fa-1x mt-1'>
+                                                    <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                    <i class='fas fa-fw fa-building fa-stack-1x'></i>
+                                                </span> 
                                             </div>
-                                        </a>
+                                            <div class='col col-auto text-left'>
+                                                <strong class='align-top'>&nbsp;My Stratas</strong>
+                                            </div>
+                                        </div>
+                                    </a>
 
                                     </div>
                                 </li>
                                 <li class="nav-item">
                                     <div class='container'>
-                                                
+                                        
                                         <a class='nav-link text-dark' ng-click="logout()">
                                             <div class='row'>
-                                                <div class='col-2 offset-2 text-right text-dark'>
-                                                    <span class='fa-stack fa-md'>
-                                                        <i class='fa fa-fw fa-square-o fa-stack-2x'></i>
-                                                        <i style='margin-top: -1px;' class='fa fa-fw fa-sign-out fa-stack-1x'></i>
-                                                    </span>
+                                                <div class='col-2 offset-2 text-right'>
+                                                    <span class='fa-stack fa-1x mt-1'>
+                                                        <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                        <i class='fas fa-fw fa-sign-out-alt fa-stack-1x'></i>
+                                                    </span> 
                                                 </div>
-                                                <div class='col col-auto text-left text-dark'>
-                                                    <strong class='align-middle'>&nbsp;Log Out</strong>
+                                                <div class='col col-auto text-left'>
+                                                    <strong class='align-top'>&nbsp;Log Out</strong>
                                                 </div>
                                             </div>
                                         </a>
