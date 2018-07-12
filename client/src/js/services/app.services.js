@@ -59,7 +59,7 @@
                                 <div class='row'>
                                     <div class='col-2 offset-2 text-right'>
                                         <span class='fa-stack fa-1x' ng-class="{
-                                            'mt-1-3': screenIsMobile
+                                            'mt-1-3': screenIsMobile,
                                         }">
                                             <i class="far fa-square fa-stack-2x"></i>
                                             <i class='fas fa-fw fa-home fa-stack-1x'></i>
@@ -89,7 +89,8 @@
                                     <div class='row'>
                                         <div class='col-2 offset-2 text-right'>
                                             <span class='fa-stack fa-1x' ng-class="{
-                                                'mt-1-3': screenIsMobile
+                                                'mt-1-3': screenIsMobile,
+                                                'mt-1-12': !screenIsMobile
                                             }">
                                                 <i class="far fa-square fa-stack-2x"></i>
                                                 <i class='fas fa-fw fa-cog fa-stack-1x'></i>
@@ -119,7 +120,8 @@
                                 <div class='row'>
                                     <div class='col-2 offset-2 text-right'>
                                         <span class='fa-stack fa-1x' ng-class="{
-                                            'mt-1-3': screenIsMobile
+                                            'mt-1-3': screenIsMobile,
+                                            'mt-1-12': !screenIsMobile
                                         }">
                                             <i class="far fa-square fa-stack-2x"></i>
                                             <i class='fas fa-fw fa-dollar-sign fa-stack-1x'></i>
@@ -149,7 +151,10 @@
                                 <a class='nav-link text-dark' ui-sref='app.login' ng-if="!Account.isAuthenticated()">
                                     <div class='row'>
                                         <div class='col-2 offset-2 text-right'>
-                                            <span class='fa-stack fa-1x'>
+                                            <span class='fa-stack fa-1x' ng-class="{
+                                                'mt-1-3': screenIsMobile,
+                                                'mt-1-12': !screenIsMobile
+                                            }">
                                                 <i class='far fa-fw fa-square fa-stack-2x'></i>
                                                 <i class='fas fa-fw fa-sign-in-alt fa-stack-1x'></i>
                                             </span>
