@@ -427,5 +427,19 @@
                 return alert;
             }
         };
+    }])
+    
+    .factory('StrataFactory', ['Strata', function(Strata) {
+
+        function Strata(strata) {
+            this.name       = strata && strata.name ? strata.name : '';
+            this.address    = strata && strata.address ? strata.address : '';
+            this.city       = strata && strata.city ? strata.city : '';
+            this.country    = strata && strata.country ? strata.country : '';
+            this.provState  = strata && strata.provState ? strata.provState : '';
+            this.postalZip  = strata && strata.postalZip ? strata.postalZip : '';
+        }
+
+        return Strata;
     }]);
 })(angular);

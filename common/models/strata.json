@@ -6,25 +6,29 @@
     "validateUpsert": true
   },
   "properties": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "Address": {
+    "address": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "City": {
+    "city": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "Country": {
+    "country": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "ProvState": {
+    "provState": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "postalCode": {
+      "type": "string",
+      "required": false
     }
   },
   "validations": [],
@@ -32,7 +36,7 @@
     "accountOwner": {
       "type": "belongsTo",
       "model": "Account",
-      "foreignKey": ""
+      "foreignKey": "accountId"
     }
   },
   "acls": [],

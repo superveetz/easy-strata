@@ -98,12 +98,83 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         description: "Strata management software that is easy to use.."
       })
 
+      .state('app.404', {
+        url: '/404',
+        templateUrl: require('./views/404/index.html'),
+        title: '404: Page Not Found'
+      })
+
       .state('app.my-strata', {
         url: '/my-strata',
-        controller: 'MyStrataCtrl',
         templateUrl: require('./views/my-strata/index.html'),
+        controller: 'MyStrataCtrl',
+        resolve: {
+          stratas: ['$rootScope', 'Strata', function($rootScope, Strata) {
+            console.log("$rootScope.currentUser:", $rootScope.currentUser);
+            return [];
+
+            return Strata.findMany({
+              filter: {
+                where: {
+                  accountId: $rootScope.currentUser.id
+                }
+              }
+            })
+            .$promise
+            .then(succ => {
+              console.log("succ:", succ);
+              return succ;
+            })
+            .catch(err => {
+              console.log("err:", err);
+              return [];
+            });
+          }]
+        },
         title: 'My Strata',
         description: "Strata management software that is easy to use.."
+      })
+      
+      .state('app.strata', {
+        url: '/strata',
+        abstract: true,
+        templateUrl: require('./views/strata/index.html')
+      })
+      
+      .state('app.strata.create', {
+        url: '/create',
+        templateUrl: require('./views/strata/create/index.html'),
+        controller: 'StrataCreateCtrl',
+        title: 'Create Strata'
+      })
+
+      .state('app.strata.main', {
+        url: '/:strataId',
+        templateUrl: require('./views/strata/main/index.html'),
+        controller: 'StrataMainCtrl',
+        resolve: {
+          strata: ['$q', '$state', '$stateParams', 'Strata', function($q, $state, $stateParams, Strata) {
+            return Strata.findById({
+              id: $stateParams.strataId
+            })
+            .$promise
+            .then(succ => {
+              return succ;
+            })
+            .catch(err => {
+              return $state.transitionTo('app.404');
+            });
+
+          }]
+        }
+      })
+
+      .state('app.strata.main.dashboard', {
+        url: '/dashboard?createStrataSucc',
+        templateUrl: require('./views/strata/main/dashboard/index.html'),
+        controller: 'StrataDashboardCtrl',
+        resolve: {
+        }
       });
     // .state('app.contact', {
     //     url: '/contact',

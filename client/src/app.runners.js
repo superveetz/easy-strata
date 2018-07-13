@@ -12,10 +12,11 @@ const Runners = ['$rootScope', '$state', '$timeout', '$stateParams', '$location'
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.currentUser = undefined;
+
+    // todo, move this to 'app' resolve
     if (Account.isAuthenticated()) {
       console.log("Account.getCachedCurrent():", Account.getCachedCurrent());
       
-      $timeout(event => {
         Account.getCurrent()
         .$promise
         .then(succ => {
@@ -26,7 +27,6 @@ const Runners = ['$rootScope', '$state', '$timeout', '$stateParams', '$location'
           console.log("err:", err);
           
         });
-      }, 5000);
     }
     $rootScope.$on('loopback-auth-success', (event, currUser) => {
       $timeout(() => {

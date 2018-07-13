@@ -64,7 +64,20 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.mainNavLinks = [];
         $scope.MainNavService = MainNavService;
         $scope.authDDToggled = false;
-        $scope.screenIsMobile = screenSize.is('xs, sm');
+        $scope.screenIsMobile = screenSize.is('xs');
+        
+        screenSize.on('xs', (isMatch) => {
+            // if was mobile and now desktop, close side nav
+            if ($scope.screenIsMobile && !isMatch) {
+                $rootScope.$emit('close-side-nav');
+            }
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobile = true;
+            } else {
+                $scope.screenIsMobile = false;
+            }
+        });
         
 
         // init sideNavLinks for parent ctrl
@@ -144,19 +157,6 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             .catch(err => {
             });
         };
-
-        screenSize.on('xs', (isMatch) => {
-            // if was mobile and now desktop, close side nav
-            if ($scope.screenIsMobile && !isMatch) {
-                $rootScope.$emit('close-side-nav');
-            }
-            // update scope
-            if (isMatch) {
-                $scope.screenIsMobile = true;
-            } else {
-                $scope.screenIsMobile = false;
-            }
-        });
     }])
     
     .controller('AccountModalCtrl', ['$rootScope', '$scope', '$timeout', '$state', '$uibModalInstance', 'Account', 'AlertService', function($rootScope, $scope, $timeout, $state, $uibModalInstance, Account, AlertService) {
@@ -456,5 +456,64 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         $scope.trustHtml = function(htmlCode) {
             return Util.trustHTML(htmlCode, $scope);
         };
+    }])
+    
+    .controller('StrataCreateCtrl', ['$scope', '$rootScope', '$state', 'Strata', 'screenSize', 'StrataFactory', function($scope, $rootScope, $state, Strata, screenSize, StrataFactory) {
+        // init scope
+        $scope.submitForm = false;
+        $scope.strata = new StrataFactory();
+        $scope.screenIsMobile = screenSize.is('xs');
+        
+        screenSize.on('xs', (isMatch) => {
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobile = true;
+            } else {
+                $scope.screenIsMobile = false;
+            }
+        });
+
+        /* Functions */
+
+        // save submit strata form
+        $scope.submitStrataForm = function() {
+            $scope.submitForm = true;
+            $scope.strata.accountId = $rootScope && $rootScope.currentUser ? $rootScope.currentUser.id : undefined;
+            
+            Strata.create($scope.strata)
+            .$promise
+            .then(succ => {
+                $scope.submitForm = false;
+                
+                // $scope.submitForm = false;
+                $state.transitionTo('app.strata.main.dashboard', { strataId: succ.id, createStrataSucc: 'y' });
+            })
+            .catch(err => {
+                console.log("err:", err);
+                $scope.submitForm = false;
+            });
+        };
+    }])
+
+    .controller('StrataMainCtrl', ['$scope', 'strata', 'StrataFactory', function($scope, strata, StrataFactory) {
+        $scope.strata = new StrataFactory(strata);
+        
+    }])
+    
+    .controller('StrataDashboardCtrl', ['$scope', '$stateParams', 'AlertService',  function($scope, $stateParams, AlertService) {
+        // init scope
+        console.log("$scope.strata from Dash:", $scope.strata);
+        
+        // display create success alert
+        if ($stateParams.createStrataSucc) {
+            AlertService.setAlert({
+                show: true,
+                type: 'success',
+                dismissable: true,
+                title: 'Strata Created',
+                subHeader: 'Welcome To Your Strata Dashboard',
+                text: "Your new strata was created successfully."
+            });
+        }
     }]);
 })(angular);
