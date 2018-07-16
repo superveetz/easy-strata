@@ -1,3 +1,168 @@
 <section>
-    <alert-box></alert-box>
+    <div class='container'>
+        <alert-box></alert-box>
+
+        <h2 class="page-header">Dashboard</h2>
+        <!-- Heading Row -->
+        <div class="row">
+            <div class="col-lg-8"><img alt="" class="img-fluid rounded" src="http://placehold.it/900x400"></div><!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+                <h3>
+                    <div ng-show="!editName.show">
+                        {{strata.name}}
+                        <button
+                            ng-click="toggleEdit(editName, 'show')"
+                            type='button' 
+                            class='btn text-sm float-right btn-sm btn-warning border-dark'><i class='fas fa-edit'></i> Edit</button>
+                    </div>
+    
+                    <form id='editNameForm'
+                        name='editNameForm'
+                        class='mt-2'
+                        ng-show="editName.show"
+                        ng-submit="editNameForm.$valid && submitEditNameForm()">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="editName"
+                                name="editName"
+                                ng-model="strata.name"
+                                class="form-control border-info" 
+                                required>
+    
+                            <div class="input-group-append">
+                                <button 
+                                    class="btn btn-outline-success bg-white text-success" 
+                                    type="submit" >
+                                    <i class='far fa-check-square'></i>
+                                    &nbsp;Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </h3>
+                <p> <!-- ng-if="strata.desc || isStrataAdmin"  -->
+                    <div ng-show="!editDesc.show">
+                        {{strata.desc ? strata.desc : 'Write a brief description or introduction for your strata home page that your members will see..'}}
+                        <button
+                            ng-click="toggleEdit(editDesc, 'show')"
+                            type='button' 
+                            class='btn btn-sm btn-warning text-sm border-dark float-right'><i class='fas fa-edit'></i> Edit</button>
+                    </div>
+    
+                    <form id='editDescForm'
+                        name='editDescForm'
+                        class='mt-2'
+                        ng-show="editDesc.show"
+                        ng-submit="editDescForm.$valid && submitEditDescForm()">
+                        <div class="input-group">
+                            <textarea 
+                                id="editDesc"
+                                name="editDesc"
+                                ng-model="strata.desc"
+                                class="form-control border-info">
+                            </textarea>
+    
+                            <div class="input-group-append">
+                                <button 
+                                    class="btn btn-outline-success bg-white text-success" 
+                                    type="submit" >
+                                    <i class='far fa-check-square'></i>
+                                    &nbsp;Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </p>
+            </div><!-- /.col-md-4 -->
+        </div><!-- /.row -->
+        <!-- Call to Action Well -->
+        <div class="card text-white bg-secondary my-4 text-center">
+            <div class="card-body">
+                <p class="text-white m-0"
+                    ng-show="!editReminder.show">
+                    <i class="far fa-star"></i> {{strata.reminder ? strata.reminder : 'Use this call-to-action area to showcase important information or to provide a friendly reminders!'}}
+    
+                    <button
+                        ng-click="toggleEdit(editReminder, 'show')"
+                        type='button' 
+                        class='btn btn-sm btn-warning text-sm float-right'><i class='fas fa-edit'></i> Edit</button>
+                </p>
+    
+                <form id='editReminderForm'
+                    name='editReminderForm'
+                    class='mt-2'
+                    ng-show="editReminder.show"
+                    ng-submit="editReminderForm.$valid && submitEditReminderForm()">
+                    <div class="input-group">
+                        <textarea 
+                            id="editReminder"
+                            name="editReminder"
+                            ng-model="strata.reminder"
+                            class="form-control border-info">
+                        </textarea>
+    
+                        <div class="input-group-append">
+                            <button 
+                                class="btn btn-outline-success bg-white text-success" 
+                                type="submit" >
+                                <i class='far fa-check-square'></i>
+                                &nbsp;Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- Content Row -->
+        <div class="row">
+            <div class='col-12'>
+                <h2 class="page-header"
+                    ng-class="{
+                        'float-left': !screenIsMobile
+                    }">
+                    Announcements 
+                </h2>
+                
+                <button type='button' class='btn btn-outline-success mb-2'
+                    ng-class="{
+                        'float-right': !screenIsMobile
+                    }"
+                    ui-sref='app.strata.main.save-announcement'>Create Announcement <i class='fas fa-angle-double-right'></i></button>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Card One</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" href="#">More Info</a>
+                    </div>
+                </div>
+            </div><!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Card Two</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" href="#">More Info</a>
+                    </div>
+                </div>
+            </div><!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Card Three</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" href="#">More Info</a>
+                    </div>
+                </div>
+            </div><!-- /.col-md-4 -->
+        </div><!-- /.row -->
+    </div>
 </section>

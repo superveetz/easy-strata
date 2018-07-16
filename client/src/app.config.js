@@ -35,7 +35,29 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         abstract: true,
         url: '',
         templateUrl: require('./views/index.html'),
-        controller: 'AppCtrl'
+        controller: 'AppCtrl',
+        resolve: {
+          currentUser: ['$rootScope', 'Account', function($rootScope, Account) {
+            // check if user is authenticated before rendering rest of the app
+            if (Account.isAuthenticated()) {
+              return Account.getCurrent()
+              .$promise
+              .then(succ => {
+                console.log('currentUser: ', succ);
+
+                $rootScope.currentUser = succ;
+                return succ;
+              })
+              .catch(err => {
+                console.log('resolve curr user err: ', err);
+                $rootScope.currentUser = {};
+                return {};
+              });
+            } else {
+              $rootScope.currentUser = {};
+            }
+          }]
+        }
       })
 
       .state('app.verified', {
@@ -109,26 +131,30 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         templateUrl: require('./views/my-strata/index.html'),
         controller: 'MyStrataCtrl',
         resolve: {
-          stratas: ['$rootScope', 'Strata', function($rootScope, Strata) {
-            console.log("$rootScope.currentUser:", $rootScope.currentUser);
-            return [];
+          stratas: ['$q', '$rootScope', '$state', 'Account', 'Strata', function($q, $rootScope, $state, Account, Strata) {
+            let d = $q.defer();
+            
+            if (!$rootScope.currentUser || !$rootScope.currentUser.id) { 
+              d.reject('Not Logged In', {redirectTo: 'app.404'});
+              return d.promise;
+            }
 
-            return Strata.findMany({
+            Strata.find({
               filter: {
                 where: {
-                  accountId: $rootScope.currentUser.id
+                  accountId: $rootScope.currentUser.id 
                 }
               }
             })
             .$promise
             .then(succ => {
-              console.log("succ:", succ);
-              return succ;
+              d.resolve(succ);
             })
             .catch(err => {
-              console.log("err:", err);
-              return [];
+              d.reject({redirectTo: 'app.404'});
             });
+
+            return d.promise;
           }]
         },
         title: 'My Strata',
@@ -154,17 +180,22 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         controller: 'StrataMainCtrl',
         resolve: {
           strata: ['$q', '$state', '$stateParams', 'Strata', function($q, $state, $stateParams, Strata) {
-            return Strata.findById({
+            let d = $q.defer();
+            
+            Strata.findById({
               id: $stateParams.strataId
             })
             .$promise
             .then(succ => {
+              d.resolve(succ);
               return succ;
             })
             .catch(err => {
-              return $state.transitionTo('app.404');
+              d.reject('Not Found or Not Logged In', { redirectTo: 'app.404' });
+              return {};
             });
 
+            return d.promise;
           }]
         }
       })
@@ -174,7 +205,69 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         templateUrl: require('./views/strata/main/dashboard/index.html'),
         controller: 'StrataDashboardCtrl',
         resolve: {
+        },
+        title: 'Dashboard'
+      })
+
+      .state('app.strata.main.save-announcement', {
+        url: '/save-announcement',
+        templateUrl: require('./views/strata/main/save-announcement/index.html'),
+        controller: 'StrataSaveAnnouncementCtrl',
+        title: 'Save Announcement'
+      })
+
+      .state('app.strata.main.announcements', {
+        url: '/announcements',
+        templateUrl: require('./views/strata/main/announcements/index.html'),
+        abstract: true,
+        resolve: {
+          strataAnnouncements: ['$q', 'StrataAnnouncement', '$stateParams', function($q, StrataAnnouncement, $stateParams) {
+            var d = $q.defer();
+
+            StrataAnnouncement.find({
+              where: {
+                strataId: $stateParams.strataId
+              }
+            })
+            .$promise
+            .then(succ => {
+              d.resolve(succ);
+            })
+            .catch(err => {
+              d.reject('Invalid Strata ID or Unauthorized', { redirectTo: 'app.404' });
+            });
+
+            return d.promise;
+          }]
         }
+      })
+
+      .state('app.strata.main.announcements.list', {
+        url: '?createAnnouncementSucc',
+        templateUrl: require('./views/strata/main/announcements/list.html'),
+        controller: 'StrataAnnouncementsListCtrl',
+        title: 'Announcements'
+      })
+
+      .state('app.strata.main.announcements.create', {
+        url: '/save?announcementId',
+        templateUrl: require('./views/strata/main/announcements/create.html'),
+        controller: 'StrataAnnouncementsCreateCtrl',
+        title: 'Save Announcement'
+      })
+
+      .state('app.strata.main.members', {
+        url: '/members',
+        templateUrl: require('./views/strata/main/members/index.html'),
+        controller: 'StrataMembersCtrl',
+        title: 'Members'
+      })
+
+      .state('app.strata.main.minutes', {
+        url: '/minutes',
+        templateUrl: require('./views/strata/main/minutes/index.html'),
+        controller: 'StrataMinutesCtrl',
+        title: 'Minutes'
       });
     // .state('app.contact', {
     //     url: '/contact',

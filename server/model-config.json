@@ -47,5 +47,9 @@
   "Strata": {
     "dataSource": "MongoDs",
     "public": true
+  },
+  "StrataAnnouncement": {
+    "dataSource": "MongoDs",
+    "public": true
   }
 }

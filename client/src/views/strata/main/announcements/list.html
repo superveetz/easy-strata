@@ -1,0 +1,102 @@
+<section class='container'>
+	<alert-box></alert-box>
+	<div>
+		
+	<h2 class="page-header"
+		ng-class="{
+			'float-left': !screenSize.is('xs')
+		}">
+		Announcements
+	</h2>
+
+	<a class='btn btn-outline-success'
+		ng-class="{
+			'float-right': !screenSize.is('xs')
+		}"
+		ui-sref='app.strata.main.announcements.create'>Create Announcement <i class='fas fa-angle-double-right'></i></a>
+	</div>
+
+	<div class='form-group' 
+		ng-class="{
+			'mt-2': screenSize.is('xs')
+		}">
+		<input ng-model="q" id="search" class="form-control" placeholder="Search announcements..">
+	</div>
+	
+	<div class='form-group float-left mb-0'>
+		<ul 
+			uib-pagination 
+			total-items="getData().length" 
+			ng-model="currentPage" 
+			items-per-page="pageSize" 
+			class="pagination-sm" 
+			force-ellipses="false"
+			boundary-links="false" 
+			rotate="true"
+			boundary-link-numbers="false"
+			max-size="3"
+			num-pages="numberOfPages">
+		</ul>
+	</div>
+
+	<div class="form-group float-right mb-0">
+		<select 
+			ng-model="pageSize" 
+			id="pageSize" 
+			class="form-control"
+			ng-change="updatePageSizeLimit()">
+			<option ng-repeat="option in pageSizeOptions" ng-value="{{option.value}}">{{option.text}}</option>
+		</select>
+	</div>
+
+	<table class="table table-responsive-md strata-table">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">View {{screenSize.is('xs, sm') ? '' : 'Announcement'}}</th>
+				<th scope="col">Title {{screenSize.is('xs, sm') ? '' : ' / Subject'}}</th>
+				<th scope="col">Created</th>
+				<th scope="col">Displayed</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="announcement in strataAnnouncements | filter:q | startFrom:(currentPage-1)*pageSize | limitTo:pageSizeLimit">
+				<th scope="row">
+					<a class="btn btn-sm btn-outline-primary" 
+						ui-sref="app.strata.main.announcements.save({ announcementId: announcement.id })">View {{screenSize.is('xs, sm') ? '' : 'Announcement'}} &nbsp;<i class='fas fa-angle-double-right'></i>
+					</a>
+				</th>
+				<td>
+					<p class="lead text-truncate">
+						{{announcement.title}}
+					</p>
+				</td>
+				<td>
+					<p class="">
+						{{announcement.created | date: 'MMMM dd, yyyy'}}
+					</p>
+				</td>
+				<td>
+					<p class="lead">
+						&nbsp;&nbsp;&nbsp;
+						<i ng-if="announcement.postToBoard" class='far fa-check-square fa-fw'></i>
+						<i ng-if="!announcement.postToBoard" class='far fa-window-close fa-fw'></i>
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<ul 
+		uib-pagination 
+		total-items="getData().length" 
+		ng-model="currentPage" 
+		items-per-page="pageSize" 
+		class="pagination-sm justify-content-left" 
+		force-ellipses="false"
+		boundary-links="false" 
+		rotate="true"
+		boundary-link-numbers="false"
+		max-size="3"
+		num-pages="numberOfPages">
+	</ul>
+</section>

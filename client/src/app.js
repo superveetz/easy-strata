@@ -3,6 +3,7 @@ import 'jquery';
 import 'popper.js';
 import 'bootstrap';
 import 'async';
+
 // import sweetBtn            from './js/modules/sweet-btn/release/sweet-button';
 import angular             from 'angular';
 
@@ -24,6 +25,7 @@ import Runners              from './app.runners.js';
 import Controllers          from './js/controllers/app.controllers';
 import Services             from './js/services/app.services';
 import Directives           from './js/directives/app.directives';
+import Filters              from './js/filters/app.filters';
 
 // app deps
 import lbServices           from './js/services/lb-services';
@@ -61,6 +63,7 @@ const deps    = [ /** All global dependencies */
     'app.controllers',
     'app.services',
     'app.directives',
+    'app.filters',
     'lbServices'
 ]; 
 // const modules = [Controllers];  /** All app dependencies */

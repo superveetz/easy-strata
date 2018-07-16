@@ -38,6 +38,7 @@
         return {
             restrict: 'E',
             replace: true,
+            priority: 1,
             scope: {
                 elemId: '@elemId',
             },

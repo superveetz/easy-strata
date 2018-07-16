@@ -2078,6 +2078,58 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Strata.strataAnnouncements.findById() instead.
+            "prototype$__findById__strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.destroyById() instead.
+            "prototype$__destroyById__strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.updateById() instead.
+            "prototype$__updateById__strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements() instead.
+            "prototype$__get__strataAnnouncements": {
+              isArray: true,
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.create() instead.
+            "prototype$__create__strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.destroyAll() instead.
+            "prototype$__delete__strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.count() instead.
+            "prototype$__count__strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements/count",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Strata#create
@@ -2693,6 +2745,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/Accounts/:id/stratas/count",
               method: "GET",
             },
+
+            // INTERNAL. Use StrataAnnouncement.strata() instead.
+            "::get::StrataAnnouncement::strata": {
+              url: urlBase + "/StrataAnnouncements/:id/strata",
+              method: "GET",
+            },
           }
         );
 
@@ -2980,6 +3038,1283 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.accountOwner = function() {
           var TargetResource = $injector.get("Account");
           var action = TargetResource["::get::Strata::accountOwner"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Strata.strataAnnouncements
+     * @header lbServices.Strata.strataAnnouncements
+     * @object
+     * @description
+     *
+     * The object `Strata.strataAnnouncements` groups methods
+     * manipulating `StrataAnnouncement` instances related to `Strata`.
+     *
+     * Call {@link lbServices.Strata#strataAnnouncements Strata.strataAnnouncements()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata#strataAnnouncements
+             * @methodOf lbServices.Strata
+             *
+             * @description
+             *
+             * Queries strataAnnouncements of Strata.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `filter` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncements = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::get::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#count
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Counts strataAnnouncements of Strata.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.strataAnnouncements.count = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::count::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#create
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Creates a new instance in strataAnnouncements of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncements.create = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::create::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#createMany
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Creates a new instance in strataAnnouncements of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncements.createMany = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::createMany::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#destroyAll
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Deletes all strataAnnouncements of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.strataAnnouncements.destroyAll = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::delete::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#destroyById
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Delete a related item by id for strataAnnouncements.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.strataAnnouncements.destroyById = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::destroyById::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#findById
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Find a related item by id for strataAnnouncements.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncements.findById = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::findById::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Strata.strataAnnouncements#updateById
+             * @methodOf lbServices.Strata.strataAnnouncements
+             *
+             * @description
+             *
+             * Update a related item by id for strataAnnouncements.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Strata id
+             *
+             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncements.updateById = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::updateById::Strata::strataAnnouncements"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.StrataAnnouncement
+ * @header lbServices.StrataAnnouncement
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `StrataAnnouncement` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "StrataAnnouncement",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/StrataAnnouncements/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use StrataAnnouncement.strata() instead.
+            "prototype$__get__strata": {
+              url: urlBase + "/StrataAnnouncements/:id/strata",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#create
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/StrataAnnouncements",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#createMany
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/StrataAnnouncements",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#patchOrCreate
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "patchOrCreate": {
+              url: urlBase + "/StrataAnnouncements",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#replaceOrCreate
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/StrataAnnouncements/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#upsertWithWhere
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source based on the where criteria.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "upsertWithWhere": {
+              url: urlBase + "/StrataAnnouncements/upsertWithWhere",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#exists
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/StrataAnnouncements/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#findById
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/StrataAnnouncements/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#replaceById
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/StrataAnnouncements/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#find
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/StrataAnnouncements",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#findOne
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/StrataAnnouncements/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#updateAll
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Information related to the outcome of the operation
+             */
+            "updateAll": {
+              url: urlBase + "/StrataAnnouncements/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#deleteById
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/StrataAnnouncements/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#count
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/StrataAnnouncements/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#prototype$patchAttributes
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+            "prototype$patchAttributes": {
+              url: urlBase + "/StrataAnnouncements/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#createChangeStream
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/StrataAnnouncements/change-stream",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.findById() instead.
+            "::findById::Strata::strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.destroyById() instead.
+            "::destroyById::Strata::strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.updateById() instead.
+            "::updateById::Strata::strataAnnouncements": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements() instead.
+            "::get::Strata::strataAnnouncements": {
+              isArray: true,
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.create() instead.
+            "::create::Strata::strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.createMany() instead.
+            "::createMany::Strata::strataAnnouncements": {
+              isArray: true,
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.destroyAll() instead.
+            "::delete::Strata::strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Strata.strataAnnouncements.count() instead.
+            "::count::Strata::strataAnnouncements": {
+              url: urlBase + "/Strata/:id/strataAnnouncements/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#upsert
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["upsert"] = R["patchOrCreate"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#updateOrCreate
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["patchOrCreate"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#patchOrCreateWithWhere
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source based on the where criteria.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["patchOrCreateWithWhere"] = R["upsertWithWhere"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#update
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Information related to the outcome of the operation
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#destroyById
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#removeById
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#updateAttributes
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R["updateAttributes"] = R["prototype$patchAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.StrataAnnouncement#modelName
+        * @propertyOf lbServices.StrataAnnouncement
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `StrataAnnouncement`.
+        */
+        R.modelName = "StrataAnnouncement";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#strata
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Fetches belongsTo relation strata.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Strata` object.)
+             * </em>
+             */
+        R.strata = function() {
+          var TargetResource = $injector.get("Strata");
+          var action = TargetResource["::get::StrataAnnouncement::strata"];
           return action.apply(R, arguments);
         };
 

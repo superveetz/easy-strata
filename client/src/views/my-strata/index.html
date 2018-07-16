@@ -2,10 +2,41 @@
     <h2 class="page-header">My Stratas</h2>
 
     <p class="lead">
-        Welcome to your Stratas Dashboard! This is the entry point to all of the stratas that you are a part of. Either select an existing strata from the list below or create a new strata right now.
+        This is the entry point to all of the stratas that you are a part of. Select an existing strata from the list below or create a new strata right now.
         <div class='btn-group'>
-            <a ui-sref='app.strata.create' class='btn btn-outline-primary'>Create Strata &nbsp;<i class="fas fa-angle-double-right"></i></a>
+            <a ui-sref='app.strata.create' class='btn btn-outline-success'>Create Strata &nbsp;<i class="fas fa-angle-double-right"></i></a>
         </div>
     </p>
 
+    <div class="card border-dark">
+        <div class="card-header border-dark">
+            Stratas
+        </div>
+        <div class="card-body text-center">
+            <div class="row">
+                <div class='col-md-4' ng-repeat="strata in stratas track by $index">
+                    <div class="card bg-light border-secondary"
+                        ng-class="{
+                            'my-2': !screenIsMobile,
+                            'mb-4': screenIsMobile && $index !== stratas.length - 1
+                        }">
+                            <div class="card-body">
+                                <h5 class="card-title">{{strata.name}}</h5>
+                                <address class="card-subtitle mb-2 text-muted"
+                                    ng-if="strata.address && strata.city && strata.provState &&  strata.country && strata.postalZip">
+                                    {{strata.address}},
+                                    {{strata.city}}, {{strata.provState}},<br>
+                                    {{strata.country}}, {{strata.postalZip}}
+                                </address>
+                                <p class="card-text">
+                                    <a class="btn btn-outline-primary" 
+                                        ui-sref="app.strata.main.dashboard({ strataId: strata.id })">View Strata &nbsp;<i class='fas fa-angle-double-right'></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

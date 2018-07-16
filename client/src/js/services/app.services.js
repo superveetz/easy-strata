@@ -57,7 +57,7 @@
                             
                             <a class='nav-link text-dark' ui-sref='app.home'>
                                 <div class='row'>
-                                    <div class='col-2 offset-2 text-right'>
+                                    <div class='col-2 offset-1 text-right'>
                                         <span class='fa-stack fa-1x' ng-class="{
                                             'mt-1-3': screenIsMobile,
                                         }">
@@ -87,7 +87,7 @@
                                 
                                 <a class='nav-link text-dark' ui-sref='app.services'>
                                     <div class='row'>
-                                        <div class='col-2 offset-2 text-right'>
+                                        <div class='col-2 offset-1 text-right'>
                                             <span class='fa-stack fa-1x' ng-class="{
                                                 'mt-1-3': screenIsMobile,
                                                 'mt-1-12': !screenIsMobile
@@ -118,7 +118,7 @@
                             
                             <a class='nav-link text-dark' ui-sref='app.pricing'>
                                 <div class='row'>
-                                    <div class='col-2 offset-2 text-right'>
+                                    <div class='col-2 offset-1 text-right'>
                                         <span class='fa-stack fa-1x' ng-class="{
                                             'mt-1-3': screenIsMobile,
                                             'mt-1-12': !screenIsMobile
@@ -150,7 +150,7 @@
                                 <!-- desktop and mobile unauthenticated -->
                                 <a class='nav-link text-dark' ui-sref='app.login' ng-if="!Account.isAuthenticated()">
                                     <div class='row'>
-                                        <div class='col-2 offset-2 text-right'>
+                                        <div class='col-2 offset-1 text-right'>
                                             <span class='fa-stack fa-1x' ng-class="{
                                                 'mt-1-3': screenIsMobile,
                                                 'mt-1-12': !screenIsMobile
@@ -165,12 +165,12 @@
                                     </div>
                                 </a>
                                 <!-- /end desktop and mobile unauthenticated -->
-
+                                
                                 <!-- desktop authenticated -->
                                 <div class="dropdown" ng-if='!screenIsMobile && Account.isAuthenticated()'>
 
                                     <a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-                                        class="nav-link text-dark" ng-click="toggleAuthenicatedDropdown()">
+                                        class="nav-link text-dark" ng-click="toggleAuthenicatedDropdown($event)">
                                         <img class='rounded-circle' src='/assets/img/default-avatar.png' alt='Profile Image' height='30' width='30'>
                                         &nbsp; 
                                         {{$root.currentUser.firstName}} {{$root.currentUser.lastName}} <i class='fa fa-fw fa-caret-down'></i>
@@ -241,7 +241,7 @@
                                         
                                         <a class='nav-link text-dark' ui-sref='app.my-profile'>
                                             <div class='row'>
-                                                <div class='col-2 offset-2 text-right'>
+                                                <div class='col-2 offset-1 text-right'>
                                                     <span class='fa-stack fa-1x mt-1'>
                                                         <i class='far fa-fw fa-square fa-stack-2x'></i>
                                                         <i class='fas fa-fw fa-user-edit fa-stack-1x'></i>
@@ -261,7 +261,7 @@
                                         
                                     <a class='nav-link text-dark' ui-sref='app.my-strata'>
                                         <div class='row'>
-                                            <div class='col-2 offset-2 text-right'>
+                                            <div class='col-2 offset-1 text-right'>
                                                 <span class='fa-stack fa-1x mt-1'>
                                                     <i class='far fa-fw fa-square fa-stack-2x'></i>
                                                     <i class='fas fa-fw fa-building fa-stack-1x'></i>
@@ -280,7 +280,7 @@
                                         
                                         <a class='nav-link text-dark' ng-click="logout()">
                                             <div class='row'>
-                                                <div class='col-2 offset-2 text-right'>
+                                                <div class='col-2 offset-1 text-right'>
                                                     <span class='fa-stack fa-1x mt-1'>
                                                         <i class='far fa-fw fa-square fa-stack-2x'></i>
                                                         <i class='fas fa-fw fa-sign-out-alt fa-stack-1x'></i>
@@ -298,12 +298,181 @@
                         </div>
                         <!-- /end mobile authenticated -->
                     `
+                },
+                strataDashboard: {
+                    name: 'Dashboard',
+                    state: 'app.strata.main.dashboard',
+                    html: `
+                    <li class="nav-item" 
+                        ng-class="{
+                            'active': $state.includes('app.strata.main.dashboard')
+                        }">
+                        <div class='container'>
+                            
+                            <a class='nav-link text-dark' ui-sref='app.strata.main.dashboard'>
+                                <div class='row'>
+                                    <div class='col-2 offset-1 text-right'>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile,
+                                            'mt-1-12': !screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-home fa-stack-1x'></i>
+                                        </span>
+                                    </div>
+                                    <div class='col col-auto text-left'>
+                                        <strong class='align-middle' ng-show="screenIsMobileOrDesktop">&nbsp;Dashboard</strong>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    `
+                },
+                strataMembers: {
+                    name: 'Members',
+                    state: 'app.strata.main.members',
+                    html: `
+                    <li class="nav-item" 
+                        ng-class="{
+                            'active': $state.includes('app.strata.main.members')
+                        }">
+                        <div class='container'>
+                            
+                            <a class='nav-link text-dark' ui-sref='app.strata.main.members'>
+                                <div class='row'>
+                                    <div class='col-2 offset-1 text-right'>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile,
+                                            'mt-1-12': !screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-users fa-stack-1x'></i>
+                                        </span>
+                                    </div>
+                                    <div class='col col-auto text-left'>
+                                        <strong class='align-middle'>&nbsp;Members</strong>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    `
+                },
+                strataAnnouncements: {
+                    name: 'Announcements',
+                    state: 'app.strata.main.announcements.list',
+                    html: `
+                    <li class="nav-item" 
+                        ng-class="{
+                            'active': $state.includes('app.strata.main.announcements.list')
+                        }">
+                        <div class='container'>
+                            
+                            <a class='nav-link text-dark' ui-sref='app.strata.main.announcements.list'>
+                                <div class='row'>
+                                    <div class='col-2 offset-1 text-right'>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile,
+                                            'mt-1-12': !screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-bullhorn fa-stack-1x'></i>
+                                        </span>
+                                    </div>
+                                    <div class='col col-auto text-left'>
+                                        <strong class='align-middle'>&nbsp;Announcements</strong>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    `
+                },
+                strataDropdown: {
+                    name: undefined,
+                    state: undefined,
+                    html: `
+                    <li class="nav-item" 
+                        ng-class="{
+                            'active': $state.includes('app.strata.main.minutes.list')
+                        }">
+                        <div class='container'>
+                            <div class="dropdown">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="strata-dropdown-toggle">
+                                    
+                                <div class='row'>
+                                    <div class='col col-auto text-left'>
+                                            <span class='text-dark fa-stack fa-1x align-middle' ng-class="{
+                                                'mt-1-3': screenIsMobile,
+                                                'mt-1-12': !screenIsMobile
+                                            }">
+                                                <i class="far fa-square fa-stack-2x"></i>
+                                                <i class='fas fa-fw fa-ellipsis-h fa-stack-1x'></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div aria-labelledby="strata-dropdown-toggle" id="strata-dropdown" class="dropdown-menu">
+                                    <a class="dropdown-item" ui-sref="app.strata.main.minutes">
+                                        <div class='row'>
+                                            <div class='col-2 text-right'>
+                                                <span class='fa-stack fa-1x'>
+                                                    <i class='far fa-fw fa-square fa-stack-2x'></i>
+                                                    <i class='far fa-fw fa-building fa-stack-1x'></i>
+                                                </span> 
+                                            </div>
+                                            <div class='col col-auto text-left'>
+                                            <strong class='align-middle'>&nbsp;Minutes</strong>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    `
+                },
+                strataMinutes: {
+                    name: 'Minutes',
+                    state: 'app.strata.main.minutes',
+                    html: `
+                    <li class="nav-item" 
+                        ng-class="{
+                            'active': $state.includes('app.strata.main.minutes')
+                        }">
+                        <div class='container'>
+                            
+                            <a class='nav-link text-dark' ui-sref='app.strata.main.minutes'>
+                                <div class='row'>
+                                    <div class='col-2 offset-1 text-right'>
+                                        <span class='fa-stack fa-1x' ng-class="{
+                                            'mt-1-3': screenIsMobile,
+                                            'mt-1-12': !screenIsMobile
+                                        }">
+                                            <i class="far fa-square fa-stack-2x"></i>
+                                            <i class='fas fa-fw fa-building fa-stack-1x'></i>
+                                        </span>
+                                    </div>
+                                    <div class='col col-auto text-left'>
+                                        <strong class='align-middle'>&nbsp;Minutes</strong>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    `
                 }
             };
 
             self.mainNav = {
                 desktopLinks: [],
                 mobileLinks: [],
+                desktopStrataDropdownLinks: []
             };
 
             self.setIntroLinks = function() {
@@ -313,27 +482,40 @@
                 self.mainNav.desktopLinks.push(Object.assign({ order: 1}, self.navLinks.home));
                 self.mainNav.desktopLinks.push(Object.assign({ order: 2}, self.navLinks.services));
                 self.mainNav.desktopLinks.push(Object.assign({ order: 3}, self.navLinks.pricing));
+
                 self.mainNav.desktopLinks.push(Object.assign({ order: 4}, self.navLinks.account));
         
                 // order mobile links
                 self.mainNav.mobileLinks.push(Object.assign({ order: 1}, self.navLinks.account));
+
                 self.mainNav.mobileLinks.push(Object.assign({ order: 2}, self.navLinks.home));
                 self.mainNav.mobileLinks.push(Object.assign({ order: 3}, self.navLinks.services));
                 self.mainNav.mobileLinks.push(Object.assign({ order: 4}, self.navLinks.pricing));
             };
 
             self.setStrataLinks = function() {
+                console.log('set strata links');
+                
                 self.mainNav.desktopLinks = [];
                 self.mainNav.mobileLinks = [];
+                self.mainNav.desktopStrataDropdownLinks = [];
+
                 // order desktop links
-                self.mainNav.desktopLinks.push(Object.assign({ order: 1}, self.navLinks.home));
-                self.mainNav.desktopLinks.push(Object.assign({ order: 2}, self.navLinks.services));
-                self.mainNav.desktopLinks.push(Object.assign({ order: 4}, self.navLinks.account));
-        
+                self.mainNav.desktopLinks.push(Object.assign({ order: 1}, self.navLinks.strataDashboard));
+                self.mainNav.desktopLinks.push(Object.assign({ order: 2}, self.navLinks.strataMembers));
+                self.mainNav.desktopLinks.push(Object.assign({ order: 3}, self.navLinks.strataAnnouncements));
+                self.mainNav.desktopLinks.push(Object.assign({ order: 4}, self.navLinks.strataDropdown));
+
+                self.mainNav.desktopLinks.push(Object.assign({ order: 5}, self.navLinks.account));
+
                 // order mobile links
                 self.mainNav.mobileLinks.push(Object.assign({ order: 1}, self.navLinks.account));
-                self.mainNav.mobileLinks.push(Object.assign({ order: 2}, self.navLinks.home));
-                self.mainNav.mobileLinks.push(Object.assign({ order: 3}, self.navLinks.services));
+
+                self.mainNav.mobileLinks.push(Object.assign({ order: 2}, self.navLinks.strataDashboard));
+                self.mainNav.mobileLinks.push(Object.assign({ order: 3}, self.navLinks.strataMembers));
+                self.mainNav.mobileLinks.push(Object.assign({ order: 4}, self.navLinks.strataAnnouncements));
+                self.mainNav.mobileLinks.push(Object.assign({ order: 5}, self.navLinks.strataMinutes));
+                
             };
 
             self.getDesktopLinks = function() {
@@ -344,7 +526,13 @@
                 return self.mainNav.mobileLinks;
             }
 
+            self.getDesktopStrataDropdownLinks = function() {
+                return self.mainNav.desktopStrataDropdownLinks;
+            };
+
             self.mainNavSetToStrata = function(scope, callback) {
+                console.log('listener reg');
+                
                 var handler = $rootScope.$on('main-nav-set-to-strata', callback);
                 scope.$on('destroy', handler);
             }
@@ -432,14 +620,31 @@
     .factory('StrataFactory', ['Strata', function(Strata) {
 
         function Strata(strata) {
-            this.name       = strata && strata.name ? strata.name : '';
-            this.address    = strata && strata.address ? strata.address : '';
-            this.city       = strata && strata.city ? strata.city : '';
-            this.country    = strata && strata.country ? strata.country : '';
-            this.provState  = strata && strata.provState ? strata.provState : '';
-            this.postalZip  = strata && strata.postalZip ? strata.postalZip : '';
+            this.id         = strata && strata.id           ? strata.id : undefined;
+            this.name       = strata && strata.name         ? strata.name : '';
+            this.address    = strata && strata.address      ? strata.address : '';
+            this.city       = strata && strata.city         ? strata.city : '';
+            this.country        = strata && strata.country      ? strata.country : '';
+            this.provState      = strata && strata.provState    ? strata.provState : '';
+            this.postalZip      = strata && strata.postalZip    ? strata.postalZip : '';
+            this.desc           = strata && strata.desc         ? strata.desc : '';
+            this.reminder       = strata && strata.reminder     ? strata.reminder : '';
         }
 
         return Strata;
+    }])
+    
+    .factory('StrataAnnouncementInst', ['StrataAnnouncement', function(StrataAnnouncement) {
+        function StrataAnnouncement(announcement) {
+            
+            this.id             = announcement && announcement.id           ? announcement.id : undefined;
+            this.title          = announcement && announcement.title        ? announcement.title : '';
+            this.expDate        = announcement && announcement.expDate      ? announcement.expDate : '';
+            this.desc           = announcement && announcement.desc         ? announcement.desc : '';
+            this.postToBoard    = announcement && announcement.postToBoard  ? announcement.postToBoard : false;
+            this.created        = announcement && announcement.created      ? announcement.created : undefined;
+        }
+
+        return StrataAnnouncement;
     }]);
 })(angular);

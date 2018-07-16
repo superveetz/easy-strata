@@ -130,7 +130,7 @@ module.exports = function(Account) {
             }
 
             verifyEmailOptions.to = accInst.emailToVerify;
-            verifyEmailOptions.name = accInst.firstName + accInst.lastName;
+            verifyEmailOptions.name = accInst.firstName + ' ' + accInst.lastName;
 
             accInst.verify(verifyEmailOptions, function(err, response) {
                 if (err) return cb(false);

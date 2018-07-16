@@ -2,4 +2,20 @@
     .dropdown-menu {
         width: 180px;
     }
+
+    .nav-link {
+        letter-spacing: -1px;
+    }
+
+    #strata-dropdown {
+        left: -65px;
+    }
+
+    #strata-dropdown-toggle {
+
+        &::after {
+            display:none;
+        }
+        
+    }
 }

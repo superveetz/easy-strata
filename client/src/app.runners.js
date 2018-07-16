@@ -5,29 +5,16 @@
  * @param {Object} $rootScope - Global application model.
  * @param {Object} $state - Provides interfaces to current state.
  */
-const Runners = ['$rootScope', '$state', '$timeout', '$stateParams', '$location', '$anchorScroll', '$transitions', 'SeoService', 'AlertService', 'Account', ($rootScope, $state, $timeout, $stateParams, $location, $anchorScroll, $transitions, SeoService, AlertService, Account) => {
+const Runners = ['$rootScope', '$window', '$state', '$timeout', '$stateParams', '$location', '$anchorScroll', '$transitions', 'SeoService', 'AlertService', 'Account', 'screenSize', ($rootScope, $window, $state, $timeout, $stateParams, $location, $anchorScroll, $transitions, SeoService, AlertService, Account, screenSize) => {
     'ngInject';
 
     // setup $rootScope
+    $rootScope.$window = $window;
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.currentUser = undefined;
+    $rootScope.screenSize = screenSize;
 
-    // todo, move this to 'app' resolve
-    if (Account.isAuthenticated()) {
-      console.log("Account.getCachedCurrent():", Account.getCachedCurrent());
-      
-        Account.getCurrent()
-        .$promise
-        .then(succ => {
-          console.log("succ:", succ);
-          $rootScope.currentUser = succ;
-        })
-        .catch(err => {
-          console.log("err:", err);
-          
-        });
-    }
     $rootScope.$on('loopback-auth-success', (event, currUser) => {
       $timeout(() => {
         $rootScope.currentUser = currUser;
@@ -46,12 +33,22 @@ const Runners = ['$rootScope', '$state', '$timeout', '$stateParams', '$location'
       // emit state change succ
       $rootScope.$emit('state-change-start');
       AlertService.reset();
-
       // trigger events to change navbar links
-      if (transition.to().name.indexOf('app.pricing') != -1) {
-        $rootScope.$emit('main-nav-set-to-strata');
+      if (transition.to().name.indexOf('app.strata.main') != -1) {
+        $rootScope.$emit('main-nav-set-to-strata'); 
       } else {
         $rootScope.$emit('main-nav-set-to-intro');
+      }
+    });
+
+    $transitions.onFinish({}, (transition) => {
+    });
+
+    $transitions.onError({}, function(transition) {
+      let error = transition.error();
+      
+      if (error && error.detail && error.detail.redirectTo) {
+        $state.go(error.detail.redirectTo);
       }
     });
   

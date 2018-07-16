@@ -21,6 +21,7 @@
       "required": true
     }
   },
+  "hidden": ["password", "verificationToken", "email"],
   "validations": [],
   "relations": {
     "stratas": {

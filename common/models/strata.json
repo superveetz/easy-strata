@@ -26,7 +26,15 @@
       "type": "string",
       "required": false
     },
-    "postalCode": {
+    "postalZip": {
+      "type": "string",
+      "required": false
+    },
+    "desc": {
+      "type": "string",
+      "required": false
+    },
+    "reminder": {
       "type": "string",
       "required": false
     }
@@ -37,6 +45,11 @@
       "type": "belongsTo",
       "model": "Account",
       "foreignKey": "accountId"
+    },
+    "strataAnnouncements": {
+      "type": "hasMany",
+      "model": "StrataAnnouncement",
+      "foreignKey": "strataId"
     }
   },
   "acls": [],

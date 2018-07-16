@@ -5,13 +5,33 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         'app.services'
     ])
 
-    .controller('AppCtrl', ['$rootScope', '$scope', function($scope, $rootScope) {
+    .controller('AppCtrl', ['$rootScope', '$scope', 'screenSize', function($scope, $rootScope, screenSize) {
+        // $rootScope.currentUser = currentUser;
+        
+        $scope.screenIsMobile = screenSize.is('xs');
+        
+        screenSize.on('xs', (isMatch) => {
+            // if was mobile and now desktop, close side nav
+            if ($scope.screenIsMobile && !isMatch) {
+                $rootScope.$emit('close-side-nav');
+            }
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobile = true;
+            } else {
+                $scope.screenIsMobile = false;
+            }
+        });
+        
+        /* Functions */
+
         $scope.emitCloseSideNav = function() {
             $rootScope.$emit('close-side-nav');
         };
     }])
 
     .controller('MainNavCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
+        
         $scope.navToggled           = false;
         // close side nav on change success start event
         $rootScope.$on('state-change-start', function() {
@@ -58,15 +78,15 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
     }])
 
     .controller('MainNavLinksCtrl', ['$rootScope', '$scope', '$timeout', '$sce', '$compile', '$state', 'ModalService', 'MainNavService', 'Util', 'Account', 'screenSize', function($rootScope, $scope, $timeout, $sce, $compile, $state, ModalService, MainNavService, Util, Account, screenSize) {
+        console.log('main nav links ctrl');
         // init scope
         $scope.$state = $state;
         $scope.Account = Account;
         $scope.mainNavLinks = [];
         $scope.MainNavService = MainNavService;
         $scope.authDDToggled = false;
-        $scope.screenIsMobile = screenSize.is('xs');
-        
-        screenSize.on('xs', (isMatch) => {
+        $scope.screenIsMobile = screenSize.is('xs, sm');
+        screenSize.on('xs, sm', (isMatch) => {
             // if was mobile and now desktop, close side nav
             if ($scope.screenIsMobile && !isMatch) {
                 $rootScope.$emit('close-side-nav');
@@ -78,17 +98,16 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
                 $scope.screenIsMobile = false;
             }
         });
-        
 
-        // init sideNavLinks for parent ctrl
-        if ($scope.elemId == 'side-nav-links') {
-            $timeout(function() {
-                $scope.sideNavLinks = angular.element('#side-nav-links');
-            }, 0);
-        }
-
-        // initialize scope.sideNavLinks for parent controller once child has loaded
-        updateNavLinks();
+        $scope.screenIsMobileOrDesktop = screenSize.is('xs, sm, lg');
+        screenSize.on('xs, sm, lg', (isMatch) => {
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobileOrDesktop = true;
+            } else {
+                $scope.screenIsMobileOrDesktop = false;
+            }
+        });
 
         // setup listener to update links as pages change
         MainNavService.mainNavSetToIntro($scope, function() {
@@ -100,6 +119,21 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             $scope.MainNavService.setStrataLinks();
             updateNavLinks();
         });
+
+        if ($state.includes('app.strata.main')) {
+            $rootScope.$emit('main-nav-set-to-strata')
+        }
+        
+
+        // init sideNavLinks for parent ctrl
+        if ($scope.elemId == 'side-nav-links') {
+            $timeout(function() {
+                $scope.sideNavLinks = angular.element('#side-nav-links');
+            }, 0);
+        }
+
+        // initialize scope.sideNavLinks for parent controller once child has loaded
+        updateNavLinks();
 
         function updateNavLinks() {
             if ($scope.elemId == 'side-nav-links') {
@@ -118,7 +152,6 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
         //open account modal
         $scope.openAccountModal     = function(event) {
-            
             event.preventDefault();
             event.stopImmediatePropagation();
 
@@ -142,8 +175,11 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         };
 
         $scope.toggleAuthenicatedDropdown = function(event) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
+            if ($scope.screenIsMobile) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+
             $scope.authDDToggled = !$scope.authDDToggled;
         };
 
@@ -263,7 +299,8 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             })
             .$promise
             .then(function(succ) {
-                console.log("succ:", succ);
+                console.log("login succ:", succ);
+                $rootScope.currentUser = succ.user;
                 $rootScope.$emit('loopback-auth-success', succ.user);
                 
                 //successful login
@@ -448,7 +485,21 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         }, 500);
     }])
     
-    .controller('MyStrataCtrl', ['$scope', 'Account', function($scope, Account) {
+    .controller('MyStrataCtrl', ['$scope', 'Account', 'stratas', 'screenSize', function($scope, Account, stratas, screenSize) {
+        // init scope
+        $scope.stratas = stratas;
+        console.log("stratas:", stratas);
+        
+        $scope.screenIsMobile = screenSize.is('xs, sm');
+        
+        screenSize.on('xs', (isMatch) => {
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobile = true;
+            } else {
+                $scope.screenIsMobile = false;
+            }
+        });
     }])
     
     .controller('AlertBoxCtrl', ['$scope', 'Util', function($scope, Util) {
@@ -462,7 +513,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         // init scope
         $scope.submitForm = false;
         $scope.strata = new StrataFactory();
-        $scope.screenIsMobile = screenSize.is('xs');
+        $scope.screenIsMobile = screenSize.is('xs, sm');
         
         screenSize.on('xs', (isMatch) => {
             // update scope
@@ -480,7 +531,15 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             $scope.submitForm = true;
             $scope.strata.accountId = $rootScope && $rootScope.currentUser ? $rootScope.currentUser.id : undefined;
             
-            Strata.create($scope.strata)
+            Strata.create({
+                name: $scope.strata.name,
+                address: $scope.strata.address,
+                city: $scope.strata.city,
+                country: $scope.strata.country,
+                provState: $scope.strata.provState,
+                postalZip: $scope.strata.postalZip,
+                accountId: $rootScope.currentUser.id
+            })
             .$promise
             .then(succ => {
                 $scope.submitForm = false;
@@ -500,10 +559,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         
     }])
     
-    .controller('StrataDashboardCtrl', ['$scope', '$stateParams', 'AlertService',  function($scope, $stateParams, AlertService) {
-        // init scope
-        console.log("$scope.strata from Dash:", $scope.strata);
-        
+    .controller('StrataDashboardCtrl', ['$scope', '$timeout', '$stateParams', 'AlertService', 'Strata', 'StrataFactory', 'strata', 'screenSize',  function($scope, $timeout, $stateParams, AlertService, Strata, StrataFactory, strata, screenSize) {
         // display create success alert
         if ($stateParams.createStrataSucc) {
             AlertService.setAlert({
@@ -515,5 +571,240 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
                 text: "Your new strata was created successfully."
             });
         }
+
+        // init scope
+        $scope.strata = new StrataFactory(strata);
+
+        $scope.screenIsMobile = screenSize.is('xs, sm');
+        screenSize.on('xs', (isMatch) => {
+            // update scope
+            if (isMatch) {
+                $scope.screenIsMobile = true;
+            } else {
+                $scope.screenIsMobile = false;
+            }
+        });
+
+        $scope.editName = {
+            elem: angular.element("#editName"),
+            show: false
+        };
+        $scope.editDesc = {
+            elem: angular.element("#editDesc"),
+            show: false
+        };
+        $scope.editReminder = {
+            elem: angular.element("#editReminder"),
+            show: false
+        };
+
+        /* Functions */
+
+        // toggle edit name
+        $scope.toggleEdit = function(editItem, action) {
+            if (!action) {
+                editItem.show = !editItem.show;
+                return true;
+            }
+
+            if (action == 'show' || action == 'open') {
+                editItem.show = true;
+                // focus input
+                $timeout(e => {
+                    editItem.elem.focus();
+                }, 0);
+            }
+            else if (action == 'close' || action == 'hide' || action == 'dismiss') {
+                editItem.show = false;
+            }
+            
+        };
+
+        // submit edit name
+        $scope.submitEditNameForm = function() {
+            Strata.update({
+                where: {
+                    id:    $scope.strata.id,
+                }
+            }, {
+                name: $scope.strata.name
+            })
+             .$promise
+             .then(succ => {
+                $scope.toggleEdit($scope.editName, 'close');
+             })
+             .catch(err => {
+                 $scope.toggleEdit($scope.editName, 'close');
+             });
+        };
+
+        // submit edit desc
+        $scope.submitEditDescForm = function() {
+            
+            Strata.update({
+                where: {
+                    id:    $scope.strata.id,
+                }
+            }, {
+                desc: $scope.strata.desc
+            })
+             .$promise
+             .then(succ => {
+                $scope.toggleEdit($scope.editDesc, 'close');
+             })
+             .catch(err => {
+                 $scope.toggleEdit($scope.editDesc, 'close');
+             });
+        };
+
+        // submit edit reminder
+        $scope.submitEditReminderForm = function() {
+            Strata.update({
+                where: {
+                    id:    $scope.strata.id,
+                }
+            }, {
+                reminder: $scope.strata.reminder
+            })
+             .$promise
+             .then(succ => {
+                $scope.toggleEdit($scope.editReminder, 'close');
+             })
+             .catch(err => {
+                 $scope.toggleEdit($scope.editReminder, 'close');
+             });
+        };
+    }])
+
+    .controller('StrataAnnouncementsListCtrl', ['$scope', '$filter', '$stateParams', 'strataAnnouncements', 'AlertService', function($scope, $filter, $stateParams, strataAnnouncements, AlertService) {
+        console.log("strataAnnouncements:", strataAnnouncements);
+        // display create success alert
+        if ($stateParams.createAnnouncementSucc) {
+            AlertService.setAlert({
+                show: true,
+                type: 'success',
+                dismissable: true,
+                title: 'Announcement Created',
+                subHeader: 'asdfasdf',
+                text: "asfasd asdasd asd asd."
+            });
+        }
+
+        $scope.currentPage = 1;
+        $scope.pageSize = -1;
+        $scope.pageSizeOptions = [
+            {
+                text: 'All',
+                value: -1
+            },
+            {
+                text: 5,
+                value: 5
+            },
+            {
+                text: 10,
+                value: 10
+            },
+            {
+                text: 25,
+                value: 25
+            },
+            {
+                text: 50,
+                value: 50
+            }
+        ];
+        $scope.strataAnnouncements = strataAnnouncements;
+        $scope.q = '';
+        $scope.totalAnnouncements = strataAnnouncements.length;
+        
+        $scope.getData = function () {
+        // needed for the pagination calc
+        // https://docs.angularjs.org/api/ng/filter/filter
+            return $filter('filter')($scope.strataAnnouncements, $scope.q)
+        };
+
+        $scope.updatePageSizeLimit = function () {
+            console.log('hiya');
+            console.log("$scope.pageSize:", $scope.pageSize);
+            
+            if ($scope.pageSize < 0) {
+                console.log(1);
+                $scope.pageSizeLimit = $scope.getData().length;
+            } else {
+                console.log(2);
+                
+                $scope.pageSizeLimit = $scope.pageSize;
+            }
+        };
+
+        $scope.pageSizeLimit = $scope.getData().length;
+        
+        $scope.numberOfPages = function () {
+            let pageSizeOrAll = $scope.pageSize << 0 ? $scope.getData().length : $scope.pageSize;
+            return Math.ceil($scope.getData().length/pageSizeOrAll);                
+        };
+    }])
+
+    .controller('StrataAnnouncementsCreateCtrl', ['$scope', function($scope) {
+
+    }])
+
+    .controller('StrataSaveAnnouncementCtrl', ['$scope', '$stateParams', '$state', 'StrataAnnouncement', 'StrataAnnouncementInst', function($scope, $stateParams, $state, StrataAnnouncement, StrataAnnouncementInst) {
+        // init scope
+        $scope.announcement = new StrataAnnouncementInst();
+        
+        $scope.dateOptions = {
+            dateDisabled: false,
+            initDate: new Date(),
+            maxDate: new Date(2100, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+        };
+
+        $scope.expDateCalendar = {
+            opened: false
+        };
+
+        /* Functions */
+
+        $scope.openExpDatePicker = function() {
+            $scope.expDateCalendar.opened = true;
+        };
+
+        $scope.submitAnnouncementForm = function() {
+            $scope.formSubmit = true;
+
+            StrataAnnouncement.upsert({
+                id: $scope.announcement.id,
+                title: $scope.announcement.title,
+                desc: $scope.announcement.desc,
+                expDate: $scope.announcement.expDate ? $scope.announcement.expDate.toISOString() : undefined,
+                postToBoard: $scope.announcement.postToBoard ? $scope.announcement.postToBoard : false,
+                strataId: $stateParams.strataId
+            })
+            .$promise
+            .then(succ => {
+                $scope.formSubmit = false;
+                $state.transitionTo('app.strata.main.announcements.list', { strataId: $stateParams.strataId, createAnnouncementSucc: succ.id })
+            })
+            .catch(err => {
+                $scope.formSubmit = false;
+                console.log("err:", err);
+            });
+        };
+        
+        $scope.doSomething = function() {
+            console.log($scope.announcement.expDate)
+        };
+    }])
+    
+    .controller('StrataMembersCtrl', ['$scope', function($scope) {
+        
+        
+    }])
+    
+    .controller('StrataMinutesCtrl', ['$scope', function($scope) {
+
     }]);
 })(angular);
