@@ -1,0 +1,153 @@
+<div class="container">
+
+	<h2 class="page-header">Announcement</h2>
+
+	<section class='bg-light p-3 border border-dark'>
+
+		<h2 class="page-header">
+			<div ng-show="!editTitle.show">
+				{{announcement.title}}
+				<button
+					ng-click="toggleEdit(editTitle, 'show')"
+					type='button' 
+					class='btn text-sm float-right btn-sm p-1 btn-warning border-dark'>Edit</button>
+			</div>
+			
+			<form id='editTitleForm'
+				name='editTitleForm'
+				class='mt-2'
+				ng-show="editTitle.show"
+				ng-submit="editTitleForm.$valid && submitEditTitleForm()">
+				<div class="input-group">
+					<input 
+						type="text" 
+						id="editTitle"
+						name="editTitle"
+						ng-model="announcement.title"
+						class="form-control border-info" 
+						required>
+	
+					<div class="input-group-append">
+						<button 
+							class="btn btn-outline-danger bg-white text-danger" 
+							type="button" ng-click="toggleEdit(editTitle, 'close')">
+							<i class='far fa-window-close'></i>
+						</button>
+						<button 
+							class="btn btn-outline-success bg-white text-success" 
+							type="submit" >
+							<i class='far fa-check-square'></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</h2>
+
+		<!-- Created Date -->
+		<div class='mb-4'>
+			<em>{{announcement.created | date: 'MMMM dd, yyyy'}}</em>
+		</div>
+		
+		<!-- //End Created Date -->
+
+		<!-- <h5 class="pb-0 mb-1 text-secondary">Announcement</h5> -->
+		<div ng-show="!editDesc.show">
+			<p class='text-dark text-left m-0 p-0' >
+				<pre class='text-left m-0 p-0 pre-wrap'>{{announcement.desc}}</pre>
+				<button
+					ng-click="toggleEdit(editDesc, 'show')"
+					type='button' 
+					class='btn text-sm btn-sm p-1 btn-warning border-dark'>Edit</button>
+			</p>
+		</div>
+		
+		<form id='editDescForm'
+			name='editDescForm'
+			class='mt-2'
+			ng-show="editDesc.show"
+			ng-submit="editDescForm.$valid && submitEditDescForm()">
+			<div class="input-group">
+				<textarea 
+					id="editDesc"
+					name="editDesc"
+					placeholder="Write a description.."
+					rows=16
+					ng-model="announcement.desc"
+					class="form-control border-info">
+				</textarea>
+
+				<div class="input-group-append">
+					<button 
+						class="btn btn-outline-danger bg-white text-danger" 
+						type="button" ng-click="toggleEdit(editDesc, 'close')">
+						<i class='far fa-window-close'></i>
+					</button>
+					<button 
+						class="btn btn-outline-success bg-white text-success" 
+						type="submit" >
+						<i class='far fa-check-square'></i>
+					</button>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<section class='bg-light p-3 border border-dark mt-3'>
+		<h2 class="page-header">Comments</h2>
+
+		<form id='createPostForm'
+			name='createPostForm'
+			class='mt-2'
+			ng-submit="createPostForm.$valid && submitCreatePostForm()">
+			<div class="form-group">
+				<textarea 
+					id="post"
+					name="post"
+					placeholder="Write your comment here.."
+					rows=4
+					ng-model="post"
+					class="form-control border border-dark"
+					required>
+				</textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class='btn btn-success'>Post Comment</button>
+			</div>
+		</form>
+	</section>
+
+	<section class='bg-light p-3 mt-3 border border-dark'>
+		<div class="alert alert-info m-0" ng-if="announcement.posts.length == 0">
+			There are currently no comments
+		</div>
+
+		<div class="alert alert-dark" ng-if="announcement.posts.length > 0"
+			ng-repeat="post in announcement.posts | orderBy: 'post.created':true track by $index">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="text-left">
+							<img src="https://placehold.it/350x150.jpg" 
+								class="rounded-circle border border-white" 
+								alt="Profile Image"
+								height="40"
+								width="40">
+							<span>
+								{{post.account.firstName}} {{post.account.lastName}}
+							</span>
+							<span>
+								{{post.created | date: 'MMMM dd, yyyy'}}
+							</span>
+						</div>
+					</div>
+					<div class="col-12">
+						<p class="lead">
+							{{post.text}}
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</div>

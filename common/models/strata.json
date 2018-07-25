@@ -46,7 +46,7 @@
       "model": "Account",
       "foreignKey": "accountId"
     },
-    "strataAnnouncements": {
+    "announcements": {
       "type": "hasMany",
       "model": "StrataAnnouncement",
       "foreignKey": "strataId"

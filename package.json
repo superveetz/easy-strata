@@ -9,12 +9,13 @@
     "lint": "eslint .",
     "start": "concurrently --kill-others \"npm run webpack-dev-server\" \"npm run rest-server\"",
     "webpack-dev-server": "webpack-dev-server",
-    "rest-server": "node ./server/server.js",
+    "rest-server": "nodemon ./server/server.js",
     "build:prod": "webpack -p"
   },
   "dependencies": {
     "angular": "^1.7.2",
     "angular-animate": "^1.7.2",
+    "angular-ellipsis": "git+https://github.com/dibari/angular-ellipsis.git",
     "angular-media-queries": "^0.6.1",
     "angular-moment-picker": "^0.10.2",
     "angular-resource": "^1.7.2",

@@ -16,6 +16,7 @@ import uiBootstrap          from 'ui-bootstrap4';
 import ngSanitize           from 'angular-sanitize';
 import uiValidate           from 'angular-ui-validate';
 import matchMedia           from 'angular-media-queries';
+import dibNgEllipsis        from 'angular-ellipsis';
 
 //app 
 import Config               from './app.config.js';
@@ -60,6 +61,7 @@ const deps    = [ /** All global dependencies */
     'ngTouch',
     'ngSanitize',
     'matchMedia',
+    'dibari.angular-ellipsis',
     'app.controllers',
     'app.services',
     'app.directives',

@@ -178,15 +178,53 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         url: '/:strataId',
         templateUrl: require('./views/strata/main/index.html'),
         controller: 'StrataMainCtrl',
+      })
+
+      .state('app.strata.main.dashboard', {
+        url: '/dashboard?createStrataSucc',
+        templateUrl: require('./views/strata/main/dashboard/index.html'),
+        controller: 'StrataDashboardCtrl',
         resolve: {
           strata: ['$q', '$state', '$stateParams', 'Strata', function($q, $state, $stateParams, Strata) {
             let d = $q.defer();
+
+            let todaysDate = new Date();
+            todaysDate.setHours(0, 0, 0, 0);
+            todaysDate.toISOString();
             
             Strata.findById({
-              id: $stateParams.strataId
+              id: $stateParams.strataId,
+              filter: {
+                include: {
+                  relation: 'announcements',
+                  scope: {
+                    where: {
+                      and: [
+                        {
+                          postToBoard: true
+                        },
+                        {
+                          or: [
+                            {
+                              expDate: undefined
+                            },
+                            {
+                              expDate: {
+                                gte: todaysDate
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
             })
             .$promise
             .then(succ => {
+              console.log("succ:", succ);
+              
               d.resolve(succ);
               return succ;
             })
@@ -197,29 +235,29 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
 
             return d.promise;
           }]
-        }
-      })
-
-      .state('app.strata.main.dashboard', {
-        url: '/dashboard?createStrataSucc',
-        templateUrl: require('./views/strata/main/dashboard/index.html'),
-        controller: 'StrataDashboardCtrl',
-        resolve: {
         },
         title: 'Dashboard'
-      })
-
-      .state('app.strata.main.save-announcement', {
-        url: '/save-announcement',
-        templateUrl: require('./views/strata/main/save-announcement/index.html'),
-        controller: 'StrataSaveAnnouncementCtrl',
-        title: 'Save Announcement'
       })
 
       .state('app.strata.main.announcements', {
         url: '/announcements',
         templateUrl: require('./views/strata/main/announcements/index.html'),
         abstract: true,
+        resolve: {
+        }
+      })
+
+      .state('app.strata.main.announcements.create', {
+        url: '/create',
+        templateUrl: require('./views/strata/main/announcements/create.html'),
+        controller: 'StrataAnnouncementCreateCtrl',
+        title: 'Create Announcement'
+      })
+
+      .state('app.strata.main.announcements.list', {
+        url: '?createAnnouncementSucc',
+        templateUrl: require('./views/strata/main/announcements/list.html'),
+        controller: 'StrataAnnouncementListCtrl',
         resolve: {
           strataAnnouncements: ['$q', 'StrataAnnouncement', '$stateParams', function($q, StrataAnnouncement, $stateParams) {
             var d = $q.defer();
@@ -239,21 +277,44 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
 
             return d.promise;
           }]
-        }
-      })
-
-      .state('app.strata.main.announcements.list', {
-        url: '?createAnnouncementSucc',
-        templateUrl: require('./views/strata/main/announcements/list.html'),
-        controller: 'StrataAnnouncementsListCtrl',
+        },
         title: 'Announcements'
       })
 
-      .state('app.strata.main.announcements.create', {
-        url: '/save?announcementId',
-        templateUrl: require('./views/strata/main/announcements/create.html'),
-        controller: 'StrataAnnouncementsCreateCtrl',
-        title: 'Save Announcement'
+      .state('app.strata.main.announcements.view', {
+        url: '/:announcementId',
+        templateUrl: require('./views/strata/main/announcements/view.html'),
+        controller: 'StrataAnnouncementViewCtrl',
+        resolve: {
+          announcement: ['$q', 'StrataAnnouncement', '$stateParams', function($q, StrataAnnouncement, $stateParams) {
+            var d = $q.defer();
+
+            StrataAnnouncement.findById({
+              id: $stateParams.announcementId,
+              filter: {
+                include: {
+                  relation: "posts",
+                  scope: {
+                    include: {
+                      relation: "account",
+                    }
+                  }
+                }
+              }
+            })
+            .$promise
+            .then(succ => {
+              d.resolve(succ);
+            })
+            .catch(err => {
+              d.reject('Invalid Announcement ID or Unauthorized', { redirectTo: 'app.404' });
+            });
+
+            return d.promise;
+          }]
+        },
+        requiresAuthentication: true,
+        title: 'View Announcement'
       })
 
       .state('app.strata.main.members', {

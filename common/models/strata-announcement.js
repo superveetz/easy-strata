@@ -1,9 +1,10 @@
 'use strict';
 
 module.exports = function(StrataAnnouncement) {
-	StrataAnnouncement.observe('before save', function(ctx, next) {
+	StrataAnnouncement.beforeRemote('create', function(ctx, unused, next) {
 
-		ctx.instance.setAttribute('created', new Date().toISOString());
+		// add a default created date
+		ctx.args.data.created = new Date().toISOString();
 
 		next();
 	})

@@ -620,21 +620,23 @@
     .factory('StrataFactory', ['Strata', function(Strata) {
 
         function Strata(strata) {
-            this.id         = strata && strata.id           ? strata.id : undefined;
-            this.name       = strata && strata.name         ? strata.name : '';
-            this.address    = strata && strata.address      ? strata.address : '';
-            this.city       = strata && strata.city         ? strata.city : '';
-            this.country        = strata && strata.country      ? strata.country : '';
-            this.provState      = strata && strata.provState    ? strata.provState : '';
-            this.postalZip      = strata && strata.postalZip    ? strata.postalZip : '';
-            this.desc           = strata && strata.desc         ? strata.desc : '';
-            this.reminder       = strata && strata.reminder     ? strata.reminder : '';
+            this.id             = strata && strata.id               ? strata.id : undefined;
+            this.name           = strata && strata.name             ? strata.name : '';
+            this.address        = strata && strata.address          ? strata.address : '';
+            this.city           = strata && strata.city             ? strata.city : '';
+            this.country        = strata && strata.country          ? strata.country : '';
+            this.provState      = strata && strata.provState        ? strata.provState : '';
+            this.postalZip      = strata && strata.postalZip        ? strata.postalZip : '';
+            this.desc           = strata && strata.desc             ? strata.desc : '';
+            this.reminder       = strata && strata.reminder         ? strata.reminder : '';
+            this.announcements  = strata && strata.announcements    ? strata.announcements : [];
         }
 
         return Strata;
     }])
     
     .factory('StrataAnnouncementInst', ['StrataAnnouncement', function(StrataAnnouncement) {
+
         function StrataAnnouncement(announcement) {
             
             this.id             = announcement && announcement.id           ? announcement.id : undefined;
@@ -643,6 +645,7 @@
             this.desc           = announcement && announcement.desc         ? announcement.desc : '';
             this.postToBoard    = announcement && announcement.postToBoard  ? announcement.postToBoard : false;
             this.created        = announcement && announcement.created      ? announcement.created : undefined;
+            this.posts          = announcement && announcement.posts        ? announcement.posts : [];
         }
 
         return StrataAnnouncement;

@@ -51,5 +51,9 @@
   "StrataAnnouncement": {
     "dataSource": "MongoDs",
     "public": true
+  },
+  "AnnouncementPost": {
+    "dataSource": "MongoDs",
+    "public": true
   }
 }

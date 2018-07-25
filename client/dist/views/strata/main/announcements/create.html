@@ -1,1 +1,125 @@
-Create Announcement
+<section class='container'>
+	<!-- <button type='button'
+		class='btn btn-outline-secondary float-left'
+		ng-click='$window.history.back()'>
+		<i class='fas fa-chevron-left'></i>
+	</button>  -->
+
+	<h2 class="page-header">
+		Save Announcement
+	</h2>
+
+	<p class="">
+		Announcements are a great way to notify your strata members about upcoming inspections, neighbourhood warnings and whatever else you can think of. They also provide a way for you and your strata members to discuss each topic in its own messaging board. Select whether your announcement should be posted to your strata dashboard so that it will be immediately visible to all strata members or choose precisely which strata members are able to view each announcement.
+	</p>
+
+	<p class="lead">
+		Fill out the following form to save your announcement.
+	</p>
+
+	<form 
+		id="announcementForm" 
+		name="announcementForm"
+		ng-submit="announcementForm.$valid && submitAnnouncementForm()"
+		ng-class="{
+		'text-left': screenSize.is('xs'),
+		'text-right': !screenSize.is('xs')
+	}">
+		<div class="form-group row">
+			<label for="announcementTitle" class="col-md-2 col-form-label"><b>Title</b></label>
+			<div class="col-md-8">
+				<input type="text" 
+					id="announcementTitle"
+					name="announcementTitle"
+					class="form-control border-secondary" 
+					ng-model="announcement.title" 
+					placeholder="Title or subject"
+					aria-describedby="announcementTitleHelp" 
+					required>
+			</div>
+			<div class="col-md-2 text-left">
+				<span id="announcementTitleHelp" class="form-text text-danger">Required</span>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="announcementDesc" class="col-md-2 col-form-label"><b>Description</b></label>
+			
+			<div class="col-md-8">
+				<p class="input-group date-picker mb-0">
+					<textarea class='form-control border-secondary'
+						name="announcementDesc" 
+						id="announcementDesc" rows="5"
+						ng-model="announcement.desc"
+						aria-describedby="announcementDescHelp"
+						placeholder="Provide a description.." required></textarea>
+				</p>
+			</div>
+			<div class="col-md-2 text-left">
+				<span id="announcementDescHelp" class="form-text text-danger">Required</span>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 custom-control custom-checkbox text-left">
+				<div class='ml-3'>
+					<input type="checkbox" 
+						class="custom-control-input" 
+						id="announcementPostToBoard"
+						name="announcementPostToBoard"
+						ng-model="announcement.postToBoard">
+					<label class="custom-control-label" for="announcementPostToBoard">
+						Display this announcement on strata dashboard?
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group row" ng-if="announcement.postToBoard">
+			<label for="announcementExpDate" class="col-md-2 col-form-label"><b>Expiry Date</b></label>
+			
+			<div class="col-md-8">
+				<p class="input-group date-picker mb-0">
+					<input type="text" 
+						class="form-control border-secondary" 
+						id="announcementExpDate"
+						name="announcementExpDate"
+						uib-datepicker-popup
+						placeholder="Select an expiration date"
+						ng-model="announcement.expDate" 
+						ng-focus="openExpDatePicker()"
+						is-open="expDateCalendar.opened" 
+						datepicker-options="dateOptions" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-outline-primary" ng-click="openExpDatePicker()">
+							<i class='far fa-calendar-alt'></i>
+						</button>
+					</span>
+				</p>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-8 text-left">
+				<span id="announcementExpDateHelp" class="form-text text-muted">An expiry date is used to determine when an announcement should be removed from the dashboard. For announcements that should never expire, leave this field blank.</span>
+			</div>
+		</div>
+			
+		<div ng-class="{
+			'container': !screenSize.is('xs')
+		}">
+			<button 
+				class="btn btn-outline-success btn-block btn-lg m-auto" 
+				ng-class="{
+					'w-100': screenSize.is('xs'),
+					'w-75': !screenSize.is('xs')
+				}"
+				type="submit" 
+				ng-disabled="formSubmit">
+				<span ng-if="!formSubmit"><i class="fas fa-save fa-fw"></i></span>
+				<span ng-if="formSubmit"><i class="fa fa-fw fa-spin fa-spinner"></i></span>
+				Save Announcement
+			</button>
+		</div>
+	</form>
+</section>

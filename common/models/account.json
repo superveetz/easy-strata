@@ -7,6 +7,11 @@
     "restrictResetPasswordTokenScope": true,
     "validateUpsert": true
   },
+  "hidden": [
+    "password",
+    "verificationToken",
+    "email"
+  ],
   "properties": {
     "firstName": {
       "type": "string",
@@ -21,20 +26,24 @@
       "required": true
     }
   },
-  "hidden": ["password", "verificationToken", "email"],
   "validations": [],
   "relations": {
     "stratas": {
       "type": "hasMany",
       "model": "Strata",
       "foreignKey": "accountOwnerId"
+    },
+    "announcementPosts": {
+      "type": "hasMany",
+      "model": "AnnouncementPost",
+      "foreignKey": "accountId"
     }
   },
   "acls": [
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "accessType": "READ",

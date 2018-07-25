@@ -1,19 +1,20 @@
 <section class='container'>
 	<alert-box></alert-box>
-	<div>
-		
-	<h2 class="page-header"
-		ng-class="{
-			'float-left': !screenSize.is('xs')
-		}">
-		Announcements
-	</h2>
 
-	<a class='btn btn-outline-success'
-		ng-class="{
-			'float-right': !screenSize.is('xs')
-		}"
-		ui-sref='app.strata.main.announcements.create'>Create Announcement <i class='fas fa-angle-double-right'></i></a>
+	<div>
+		<h2 class="page-header"
+			ng-class="{
+				'float-left': !screenSize.is('xs')
+			}">
+			Announcements
+		</h2>
+
+		<a class='btn btn-outline-success'
+			ng-class="{
+				'float-right': !screenSize.is('xs')
+			}"
+			ui-sref='app.strata.main.announcements.create'>Create Announcement <i class='fas fa-angle-double-right'></i>
+		</a>
 	</div>
 
 	<div class='form-group' 
@@ -54,33 +55,42 @@
 			<tr>
 				<th scope="col">View {{screenSize.is('xs, sm') ? '' : 'Announcement'}}</th>
 				<th scope="col">Title {{screenSize.is('xs, sm') ? '' : ' / Subject'}}</th>
-				<th scope="col">Created</th>
-				<th scope="col">Displayed</th>
+				<th scope="col">Description</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="announcement in strataAnnouncements | filter:q | startFrom:(currentPage-1)*pageSize | limitTo:pageSizeLimit">
-				<th scope="row">
+			<tr ng-repeat="announcement in strataAnnouncements | orderBy: 'announcement.created':true | filter:q | startFrom:(currentPage-1)*pageSize | limitTo:pageSizeLimit">
+				<td scope="row" style='vertical-align: middle;'>
 					<a class="btn btn-sm btn-outline-primary" 
-						ui-sref="app.strata.main.announcements.save({ announcementId: announcement.id })">View {{screenSize.is('xs, sm') ? '' : 'Announcement'}} &nbsp;<i class='fas fa-angle-double-right'></i>
+						ui-sref="app.strata.main.announcements.view({ announcementId: announcement.id })">View {{screenSize.is('xs, sm') ? '' : 'Announcement'}} &nbsp;<i class='fas fa-angle-double-right'></i>
 					</a>
-				</th>
+				</td>
 				<td>
-					<p class="lead text-truncate">
-						{{announcement.title}}
+					<p class="text-dark text-truncate mb-0 pb-1" 
+						data-ng-bind="announcement.title" 
+						data-ellipsis 
+						style="font-size: 20px; height: 34px;" 
+						ng-style="{
+						'width': screenSize.is('xs, sm') ? '280px' : '540px'
+					}">
+					</p>
+					<p class="mt-0 pt-0 pb-0 mb-0 text-muted" style="font-size: 14px;">
+						<em>Created: {{announcement.created | date: 'MMMM dd, yyyy'}}</em>
 					</p>
 				</td>
 				<td>
-					<p class="">
-						{{announcement.created | date: 'MMMM dd, yyyy'}}
+					<p class="text-secondary mb-0 pb-0" 
+						data-ng-bind="announcement.desc" 
+						data-ellipsis 
+						style="height: 60px; display: inline-block; white-space: wrap;" ng-style="{
+							'width': screenSize.is('xs, sm') ? '280px' : '540px'
+						}">
 					</p>
-				</td>
-				<td>
-					<p class="lead">
+					<!-- <p class="lead">
 						&nbsp;&nbsp;&nbsp;
 						<i ng-if="announcement.postToBoard" class='far fa-check-square fa-fw'></i>
 						<i ng-if="!announcement.postToBoard" class='far fa-window-close fa-fw'></i>
-					</p>
+					</p> -->
 				</td>
 			</tr>
 		</tbody>

@@ -263,6 +263,33 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "PUT",
             },
 
+            // INTERNAL. Use Account.announcementPosts.findById() instead.
+            "prototype$__findById__announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.destroyById() instead.
+            "prototype$__destroyById__announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.updateById() instead.
+            "prototype$__updateById__announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "PUT",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Account#prototype$__get__accessTokens
@@ -440,6 +467,31 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use Account.stratas.count() instead.
             "prototype$__count__stratas": {
               url: urlBase + "/Accounts/:id/stratas/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Account.announcementPosts() instead.
+            "prototype$__get__announcementPosts": {
+              isArray: true,
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.create() instead.
+            "prototype$__create__announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.destroyAll() instead.
+            "prototype$__delete__announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.count() instead.
+            "prototype$__count__announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts/count",
               method: "GET",
             },
 
@@ -1372,6 +1424,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use AnnouncementPost.account() instead.
+            "::get::AnnouncementPost::account": {
+              url: urlBase + "/AnnouncementPosts/:id/account",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Account#getCurrent
@@ -2040,6 +2098,341 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::updateById::Account::stratas"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.Account.announcementPosts
+     * @header lbServices.Account.announcementPosts
+     * @object
+     * @description
+     *
+     * The object `Account.announcementPosts` groups methods
+     * manipulating `AnnouncementPost` instances related to `Account`.
+     *
+     * Call {@link lbServices.Account#announcementPosts Account.announcementPosts()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account#announcementPosts
+             * @methodOf lbServices.Account
+             *
+             * @description
+             *
+             * Queries announcementPosts of Account.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `filter` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.announcementPosts = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::get::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#count
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Counts announcementPosts of Account.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.announcementPosts.count = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::count::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#create
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Creates a new instance in announcementPosts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.announcementPosts.create = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::create::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#createMany
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Creates a new instance in announcementPosts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.announcementPosts.createMany = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::createMany::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#destroyAll
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Deletes all announcementPosts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.announcementPosts.destroyAll = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::delete::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#destroyById
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Delete a related item by id for announcementPosts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for announcementPosts
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.announcementPosts.destroyById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::destroyById::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#findById
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Find a related item by id for announcementPosts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for announcementPosts
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.announcementPosts.findById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::findById::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Account.announcementPosts#updateById
+             * @methodOf lbServices.Account.announcementPosts
+             *
+             * @description
+             *
+             * Update a related item by id for announcementPosts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Account id
+             *
+             *  - `fk` – `{*}` - Foreign key for announcementPosts
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.announcementPosts.updateById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::updateById::Account::announcementPosts"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -2078,55 +2471,55 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.findById() instead.
-            "prototype$__findById__strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.findById() instead.
+            "prototype$__findById__announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "GET",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.destroyById() instead.
-            "prototype$__destroyById__strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.destroyById() instead.
+            "prototype$__destroyById__announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.updateById() instead.
-            "prototype$__updateById__strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.updateById() instead.
+            "prototype$__updateById__announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "PUT",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements() instead.
-            "prototype$__get__strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements() instead.
+            "prototype$__get__announcements": {
               isArray: true,
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+              url: urlBase + "/Strata/:id/announcements",
               method: "GET",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.create() instead.
-            "prototype$__create__strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+            // INTERNAL. Use Strata.announcements.create() instead.
+            "prototype$__create__announcements": {
+              url: urlBase + "/Strata/:id/announcements",
               method: "POST",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.destroyAll() instead.
-            "prototype$__delete__strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+            // INTERNAL. Use Strata.announcements.destroyAll() instead.
+            "prototype$__delete__announcements": {
+              url: urlBase + "/Strata/:id/announcements",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.count() instead.
-            "prototype$__count__strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements/count",
+            // INTERNAL. Use Strata.announcements.count() instead.
+            "prototype$__count__announcements": {
+              url: urlBase + "/Strata/:id/announcements/count",
               method: "GET",
             },
 
@@ -3042,27 +3435,27 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         };
     /**
      * @ngdoc object
-     * @name lbServices.Strata.strataAnnouncements
-     * @header lbServices.Strata.strataAnnouncements
+     * @name lbServices.Strata.announcements
+     * @header lbServices.Strata.announcements
      * @object
      * @description
      *
-     * The object `Strata.strataAnnouncements` groups methods
+     * The object `Strata.announcements` groups methods
      * manipulating `StrataAnnouncement` instances related to `Strata`.
      *
-     * Call {@link lbServices.Strata#strataAnnouncements Strata.strataAnnouncements()}
+     * Call {@link lbServices.Strata#announcements Strata.announcements()}
      * to query all related instances.
      */
 
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata#strataAnnouncements
+             * @name lbServices.Strata#announcements
              * @methodOf lbServices.Strata
              *
              * @description
              *
-             * Queries strataAnnouncements of Strata.
+             * Queries announcements of Strata.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3089,20 +3482,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `StrataAnnouncement` object.)
              * </em>
              */
-        R.strataAnnouncements = function() {
+        R.announcements = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::get::Strata::strataAnnouncements"];
+          var action = TargetResource["::get::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#count
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#count
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Counts strataAnnouncements of Strata.
+             * Counts announcements of Strata.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3128,20 +3521,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `count` – `{number=}` -
              */
-        R.strataAnnouncements.count = function() {
+        R.announcements.count = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::count::Strata::strataAnnouncements"];
+          var action = TargetResource["::count::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#create
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#create
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Creates a new instance in strataAnnouncements of this model.
+             * Creates a new instance in announcements of this model.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3170,20 +3563,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `StrataAnnouncement` object.)
              * </em>
              */
-        R.strataAnnouncements.create = function() {
+        R.announcements.create = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::create::Strata::strataAnnouncements"];
+          var action = TargetResource["::create::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#createMany
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#createMany
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Creates a new instance in strataAnnouncements of this model.
+             * Creates a new instance in announcements of this model.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3212,20 +3605,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `StrataAnnouncement` object.)
              * </em>
              */
-        R.strataAnnouncements.createMany = function() {
+        R.announcements.createMany = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::createMany::Strata::strataAnnouncements"];
+          var action = TargetResource["::createMany::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#destroyAll
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#destroyAll
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Deletes all strataAnnouncements of this model.
+             * Deletes all announcements of this model.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3249,20 +3642,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * This method returns no data.
              */
-        R.strataAnnouncements.destroyAll = function() {
+        R.announcements.destroyAll = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::delete::Strata::strataAnnouncements"];
+          var action = TargetResource["::delete::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#destroyById
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#destroyById
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Delete a related item by id for strataAnnouncements.
+             * Delete a related item by id for announcements.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3270,7 +3663,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `options` – `{object=}` -
              *
-             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *  - `fk` – `{*}` - Foreign key for announcements
              *
              *  - `options` – `{object=}` -
              *
@@ -3286,20 +3679,20 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * This method returns no data.
              */
-        R.strataAnnouncements.destroyById = function() {
+        R.announcements.destroyById = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::destroyById::Strata::strataAnnouncements"];
+          var action = TargetResource["::destroyById::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#findById
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#findById
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Find a related item by id for strataAnnouncements.
+             * Find a related item by id for announcements.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -3307,7 +3700,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `options` – `{object=}` -
              *
-             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *  - `fk` – `{*}` - Foreign key for announcements
              *
              *  - `options` – `{object=}` -
              *
@@ -3326,26 +3719,26 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `StrataAnnouncement` object.)
              * </em>
              */
-        R.strataAnnouncements.findById = function() {
+        R.announcements.findById = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::findById::Strata::strataAnnouncements"];
+          var action = TargetResource["::findById::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Strata.strataAnnouncements#updateById
-             * @methodOf lbServices.Strata.strataAnnouncements
+             * @name lbServices.Strata.announcements#updateById
+             * @methodOf lbServices.Strata.announcements
              *
              * @description
              *
-             * Update a related item by id for strataAnnouncements.
+             * Update a related item by id for announcements.
              *
              * @param {Object=} parameters Request parameters.
              *
              *  - `id` – `{*}` - Strata id
              *
-             *  - `fk` – `{*}` - Foreign key for strataAnnouncements
+             *  - `fk` – `{*}` - Foreign key for announcements
              *
              * @param {Object} postData Request data.
              *
@@ -3370,9 +3763,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `StrataAnnouncement` object.)
              * </em>
              */
-        R.strataAnnouncements.updateById = function() {
+        R.announcements.updateById = function() {
           var TargetResource = $injector.get("StrataAnnouncement");
-          var action = TargetResource["::updateById::Strata::strataAnnouncements"];
+          var action = TargetResource["::updateById::Strata::announcements"];
           return action.apply(R, arguments);
         };
 
@@ -3410,6 +3803,58 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use StrataAnnouncement.strata() instead.
             "prototype$__get__strata": {
               url: urlBase + "/StrataAnnouncements/:id/strata",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.findById() instead.
+            "prototype$__findById__posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.destroyById() instead.
+            "prototype$__destroyById__posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.updateById() instead.
+            "prototype$__updateById__posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts() instead.
+            "prototype$__get__posts": {
+              isArray: true,
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.create() instead.
+            "prototype$__create__posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.destroyAll() instead.
+            "prototype$__delete__posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.count() instead.
+            "prototype$__count__posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts/count",
               method: "GET",
             },
 
@@ -3970,62 +4415,68 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.findById() instead.
-            "::findById::Strata::strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.findById() instead.
+            "::findById::Strata::announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "GET",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.destroyById() instead.
-            "::destroyById::Strata::strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.destroyById() instead.
+            "::destroyById::Strata::announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.updateById() instead.
-            "::updateById::Strata::strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.updateById() instead.
+            "::updateById::Strata::announcements": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Strata/:id/strataAnnouncements/:fk",
+              url: urlBase + "/Strata/:id/announcements/:fk",
               method: "PUT",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements() instead.
-            "::get::Strata::strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements() instead.
+            "::get::Strata::announcements": {
               isArray: true,
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+              url: urlBase + "/Strata/:id/announcements",
               method: "GET",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.create() instead.
-            "::create::Strata::strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+            // INTERNAL. Use Strata.announcements.create() instead.
+            "::create::Strata::announcements": {
+              url: urlBase + "/Strata/:id/announcements",
               method: "POST",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.createMany() instead.
-            "::createMany::Strata::strataAnnouncements": {
+            // INTERNAL. Use Strata.announcements.createMany() instead.
+            "::createMany::Strata::announcements": {
               isArray: true,
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+              url: urlBase + "/Strata/:id/announcements",
               method: "POST",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.destroyAll() instead.
-            "::delete::Strata::strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements",
+            // INTERNAL. Use Strata.announcements.destroyAll() instead.
+            "::delete::Strata::announcements": {
+              url: urlBase + "/Strata/:id/announcements",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Strata.strataAnnouncements.count() instead.
-            "::count::Strata::strataAnnouncements": {
-              url: urlBase + "/Strata/:id/strataAnnouncements/count",
+            // INTERNAL. Use Strata.announcements.count() instead.
+            "::count::Strata::announcements": {
+              url: urlBase + "/Strata/:id/announcements/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use AnnouncementPost.strataAnnouncement() instead.
+            "::get::AnnouncementPost::strataAnnouncement": {
+              url: urlBase + "/AnnouncementPosts/:id/strataAnnouncement",
               method: "GET",
             },
           }
@@ -4315,6 +4766,1388 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.strata = function() {
           var TargetResource = $injector.get("Strata");
           var action = TargetResource["::get::StrataAnnouncement::strata"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.StrataAnnouncement.posts
+     * @header lbServices.StrataAnnouncement.posts
+     * @object
+     * @description
+     *
+     * The object `StrataAnnouncement.posts` groups methods
+     * manipulating `AnnouncementPost` instances related to `StrataAnnouncement`.
+     *
+     * Call {@link lbServices.StrataAnnouncement#posts StrataAnnouncement.posts()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement#posts
+             * @methodOf lbServices.StrataAnnouncement
+             *
+             * @description
+             *
+             * Queries posts of StrataAnnouncement.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `filter` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.posts = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::get::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#count
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Counts posts of StrataAnnouncement.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.posts.count = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::count::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#create
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Creates a new instance in posts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.posts.create = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::create::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#createMany
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Creates a new instance in posts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.posts.createMany = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::createMany::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#destroyAll
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Deletes all posts of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `where` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.posts.destroyAll = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::delete::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#destroyById
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Delete a related item by id for posts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for posts
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.posts.destroyById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::destroyById::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#findById
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Find a related item by id for posts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `fk` – `{*}` - Foreign key for posts
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.posts.findById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::findById::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.StrataAnnouncement.posts#updateById
+             * @methodOf lbServices.StrataAnnouncement.posts
+             *
+             * @description
+             *
+             * Update a related item by id for posts.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - StrataAnnouncement id
+             *
+             *  - `fk` – `{*}` - Foreign key for posts
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R.posts.updateById = function() {
+          var TargetResource = $injector.get("AnnouncementPost");
+          var action = TargetResource["::updateById::StrataAnnouncement::posts"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.AnnouncementPost
+ * @header lbServices.AnnouncementPost
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `AnnouncementPost` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "AnnouncementPost",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/AnnouncementPosts/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use AnnouncementPost.strataAnnouncement() instead.
+            "prototype$__get__strataAnnouncement": {
+              url: urlBase + "/AnnouncementPosts/:id/strataAnnouncement",
+              method: "GET",
+            },
+
+            // INTERNAL. Use AnnouncementPost.account() instead.
+            "prototype$__get__account": {
+              url: urlBase + "/AnnouncementPosts/:id/account",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#create
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/AnnouncementPosts",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#createMany
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/AnnouncementPosts",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#patchOrCreate
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "patchOrCreate": {
+              url: urlBase + "/AnnouncementPosts",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#replaceOrCreate
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/AnnouncementPosts/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#upsertWithWhere
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source based on the where criteria.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "upsertWithWhere": {
+              url: urlBase + "/AnnouncementPosts/upsertWithWhere",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#exists
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/AnnouncementPosts/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#findById
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/AnnouncementPosts/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#replaceById
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/AnnouncementPosts/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#find
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/AnnouncementPosts",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#findOne
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/AnnouncementPosts/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#updateAll
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Information related to the outcome of the operation
+             */
+            "updateAll": {
+              url: urlBase + "/AnnouncementPosts/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#deleteById
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/AnnouncementPosts/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#count
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/AnnouncementPosts/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#prototype$patchAttributes
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - AnnouncementPost id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+            "prototype$patchAttributes": {
+              url: urlBase + "/AnnouncementPosts/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#createChangeStream
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/AnnouncementPosts/change-stream",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.findById() instead.
+            "::findById::Account::announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.destroyById() instead.
+            "::destroyById::Account::announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.updateById() instead.
+            "::updateById::Account::announcementPosts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Accounts/:id/announcementPosts/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Account.announcementPosts() instead.
+            "::get::Account::announcementPosts": {
+              isArray: true,
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.create() instead.
+            "::create::Account::announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.createMany() instead.
+            "::createMany::Account::announcementPosts": {
+              isArray: true,
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.destroyAll() instead.
+            "::delete::Account::announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Account.announcementPosts.count() instead.
+            "::count::Account::announcementPosts": {
+              url: urlBase + "/Accounts/:id/announcementPosts/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.findById() instead.
+            "::findById::StrataAnnouncement::posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.destroyById() instead.
+            "::destroyById::StrataAnnouncement::posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.updateById() instead.
+            "::updateById::StrataAnnouncement::posts": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/StrataAnnouncements/:id/posts/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts() instead.
+            "::get::StrataAnnouncement::posts": {
+              isArray: true,
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "GET",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.create() instead.
+            "::create::StrataAnnouncement::posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.createMany() instead.
+            "::createMany::StrataAnnouncement::posts": {
+              isArray: true,
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "POST",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.destroyAll() instead.
+            "::delete::StrataAnnouncement::posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use StrataAnnouncement.posts.count() instead.
+            "::count::StrataAnnouncement::posts": {
+              url: urlBase + "/StrataAnnouncements/:id/posts/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#upsert
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["upsert"] = R["patchOrCreate"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#updateOrCreate
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["patchOrCreate"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#patchOrCreateWithWhere
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source based on the where criteria.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["patchOrCreateWithWhere"] = R["upsertWithWhere"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#update
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Information related to the outcome of the operation
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#destroyById
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#removeById
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#updateAttributes
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - AnnouncementPost id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `AnnouncementPost` object.)
+             * </em>
+             */
+        R["updateAttributes"] = R["prototype$patchAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.AnnouncementPost#modelName
+        * @propertyOf lbServices.AnnouncementPost
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `AnnouncementPost`.
+        */
+        R.modelName = "AnnouncementPost";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#strataAnnouncement
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Fetches belongsTo relation strataAnnouncement.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - AnnouncementPost id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `StrataAnnouncement` object.)
+             * </em>
+             */
+        R.strataAnnouncement = function() {
+          var TargetResource = $injector.get("StrataAnnouncement");
+          var action = TargetResource["::get::AnnouncementPost::strataAnnouncement"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AnnouncementPost#account
+             * @methodOf lbServices.AnnouncementPost
+             *
+             * @description
+             *
+             * Fetches belongsTo relation account.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - AnnouncementPost id
+             *
+             *  - `options` – `{object=}` -
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Account` object.)
+             * </em>
+             */
+        R.account = function() {
+          var TargetResource = $injector.get("Account");
+          var action = TargetResource["::get::AnnouncementPost::account"];
           return action.apply(R, arguments);
         };
 

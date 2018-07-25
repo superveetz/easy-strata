@@ -5,43 +5,137 @@
         <h2 class="page-header">Dashboard</h2>
         <!-- Heading Row -->
         <div class="row">
-            <div class="col-lg-8"><img alt="" class="img-fluid rounded" src="http://placehold.it/900x400"></div><!-- /.col-lg-8 -->
+            <div class="col-lg-8"><img alt="" class="img-fluid rounded" src="https://placehold.it/900x400"></div><!-- /.col-lg-8 -->
             <div class="col-lg-4">
-                <h3>
-                    <div ng-show="!editName.show">
-                        {{strata.name}}
+                <address>
+                    <h3>
+                        <div ng-show="!editName.show">
+                            {{strata.name}}
+                            <button
+                                ng-click="toggleEdit(editName, 'show')"
+                                type='button' 
+                                class='btn text-sm float-right btn-sm btn-warning border-dark'><i class='fas fa-edit'></i> Edit</button>
+                        </div>
+                        
+                        <form id='editNameForm'
+                            name='editNameForm'
+                            class='mt-2'
+                            ng-show="editName.show"
+                            ng-submit="editNameForm.$valid && submitEditNameForm()">
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    id="editName"
+                                    name="editName"
+                                    ng-model="strata.name"
+                                    class="form-control border-info" 
+                                    required>
+        
+                                <div class="input-group-append">
+                                    <button 
+                                        class="btn btn-outline-danger bg-white text-danger" 
+                                        type="button" ng-click="toggleEdit(editName, 'close')">
+                                        <i class='far fa-window-close'></i>
+                                    </button>
+                                    <button 
+                                        class="btn btn-outline-success bg-white text-success" 
+                                        type="submit" >
+                                        <i class='far fa-check-square'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </h3>
+
+                    <div class='text-secondary' ng-if="!editAddress.show">
+                        {{strata.address}},<br>
                         <button
-                            ng-click="toggleEdit(editName, 'show')"
+                            ng-click="toggleEdit(editAddress, 'show')"
                             type='button' 
                             class='btn text-sm float-right btn-sm btn-warning border-dark'><i class='fas fa-edit'></i> Edit</button>
+                        {{strata.city}}, {{strata.provState}},<br>
+                        {{strata.country}}, {{strata.postalZip}}
                     </div>
-    
-                    <form id='editNameForm'
-                        name='editNameForm'
+        
+                    <form id='editAddressForm'
+                        name='editAddressForm'
                         class='mt-2'
-                        ng-show="editName.show"
-                        ng-submit="editNameForm.$valid && submitEditNameForm()">
-                        <div class="input-group">
-                            <input 
-                                type="text" 
-                                id="editName"
-                                name="editName"
-                                ng-model="strata.name"
-                                class="form-control border-info" 
-                                required>
-    
-                            <div class="input-group-append">
-                                <button 
-                                    class="btn btn-outline-success bg-white text-success" 
-                                    type="submit" >
-                                    <i class='far fa-check-square'></i>
-                                    &nbsp;Save
-                                </button>
+                        ng-show="editAddress.show"
+                        ng-submit="editAddressForm.$valid && submitEditAddressForm()">
+                        <div class="container">
+                            
+                            <div class="row">
+                                <div class="col-8 px-0 mx-0">
+                                    <div class='form-group my-0'>
+                                            <input 
+                                            type="text" 
+                                            id="editAddress"
+                                            name="editAddress"
+                                            placeholder="Street Address"
+                                            ng-model="strata.address"
+                                            class="form-control border-info" 
+                                            required>
+                                    </div>
+            
+                                    <div class="form-group my-0">
+                                        <input 
+                                            type="text" 
+                                            placeholder="City"
+                                            id="editCity"
+                                            name="editCity"
+                                            ng-model="strata.city"
+                                            class="form-control border-info" 
+                                            required>
+                                    </div>
+            
+                                    <div class="form-group my-0">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Province / State"
+                                            id="editProvState"
+                                            name="editProvState"
+                                            ng-model="strata.provState"
+                                            class="form-control border-info" 
+                                            required>
+                                    </div>
+            
+                                    <div class="form-group my-0">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Country"
+                                            id="editCountry"
+                                            name="editCountry"
+                                            ng-model="strata.country"
+                                            class="form-control border-info" 
+                                            required>
+                                    </div>
+
+                                    <div class="form-group my-0">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Postal / Zip Code"
+                                            id="editPostalZip"
+                                            name="editPostalZip"
+                                            ng-model="strata.postalZip"
+                                            class="form-control border-info" 
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-2 px-0 mx-0">
+                                    <button ng-click="toggleEdit(editAddress, 'close')" 
+                                        class='btn btn-block h-100 w-100 btn-outline-danger' type="button"><i class='far fa-window-close'></i>
+                                    </button>
+                                </div>
+                                <div class="col-2 px-0 mx-0">
+                                    <button class='btn btn-block h-100 w-100 btn-outline-success' type="submit"><i class='far fa-check-square'></i></button>
+                                </div>
                             </div>
+                            <!-- // end row -->
                         </div>
                     </form>
-                    
-                </h3>
+
+                </address>
+
                 <p> <!-- ng-if="strata.desc || isStrataAdmin"  -->
                     <div ng-show="!editDesc.show">
                         {{strata.desc ? strata.desc : 'Write a brief description or introduction for your strata home page that your members will see..'}}
@@ -50,7 +144,7 @@
                             type='button' 
                             class='btn btn-sm btn-warning text-sm border-dark float-right'><i class='fas fa-edit'></i> Edit</button>
                     </div>
-    
+                    
                     <form id='editDescForm'
                         name='editDescForm'
                         class='mt-2'
@@ -66,10 +160,14 @@
     
                             <div class="input-group-append">
                                 <button 
+                                    class="btn btn-outline-danger bg-white text-danger" 
+                                    type="button" ng-click="toggleEdit(editDesc, 'close')">
+                                    <i class='far fa-window-close'></i>
+                                </button>
+                                <button 
                                     class="btn btn-outline-success bg-white text-success" 
                                     type="submit" >
                                     <i class='far fa-check-square'></i>
-                                    &nbsp;Save
                                 </button>
                             </div>
                         </div>
@@ -82,7 +180,7 @@
             <div class="card-body">
                 <p class="text-white m-0"
                     ng-show="!editReminder.show">
-                    <i class="far fa-star"></i> {{strata.reminder ? strata.reminder : 'Use this call-to-action area to showcase important information or to provide a friendly reminders!'}}
+                    <i class="far fa-star"></i> {{strata.reminder ? strata.reminder : 'Use this call to action area to showcase important information or to provide a friendly reminder!'}}
     
                     <button
                         ng-click="toggleEdit(editReminder, 'show')"
@@ -105,10 +203,15 @@
     
                         <div class="input-group-append">
                             <button 
+                                class="btn btn-outline-danger bg-white text-danger" 
+                                type="button" ng-click="toggleEdit(editReminder, 'close')">
+                                <i class='far fa-window-close'></i>
+                            </button>
+
+                            <button 
                                 class="btn btn-outline-success bg-white text-success" 
                                 type="submit" >
                                 <i class='far fa-check-square'></i>
-                                &nbsp;Save
                             </button>
                         </div>
                     </div>
@@ -128,38 +231,34 @@
                     ng-class="{
                         'float-right': !screenIsMobile
                     }"
-                    ui-sref='app.strata.main.save-announcement'>Create Announcement <i class='fas fa-angle-double-right'></i></button>
+                    ui-sref='app.strata.main.announcements.create'>Create Announcement <i class='fas fa-angle-double-right'></i></button>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-sm-6 mb-4" ng-repeat="announcement in strata.announcements | orderBy:announcement.created track by $index">
                 <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0 pb-0 text-truncate">{{announcement.title}}</h5>
+                    </div>
+
                     <div class="card-body">
-                        <h2 class="card-title">Card One</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                        
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{announcement.created | date:'MMMM dd, yyyy'}}
+                            <span ng-if="announcement.expDate" class="text-info float-right">{{announcement.expDate | date:'MMMM dd, yyyy'}}</span>
+                        </h6>
+                        <p class="card-text" 
+                            data-ng-bind="announcement.desc" 
+                            data-ellipsis
+                            style='max-height: 200px;'>
+                        </p>
+
                     </div>
+
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="#">More Info</a>
-                    </div>
-                </div>
-            </div><!-- /.col-md-4 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">Card Two</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" href="#">More Info</a>
-                    </div>
-                </div>
-            </div><!-- /.col-md-4 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">Card Three</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" href="#">More Info</a>
+                        <div class="text-center text-center w-100">
+                            <a class="btn btn-outline-primary" 
+                                ui-sref="app.strata.main.announcements.view({ announcementId: announcement.id })">View More Info <i class='fas fa-angle-double-right'></i>
+                            </a>
+                        </div>                        
                     </div>
                 </div>
             </div><!-- /.col-md-4 -->

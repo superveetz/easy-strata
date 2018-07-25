@@ -554,8 +554,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         };
     }])
 
-    .controller('StrataMainCtrl', ['$scope', 'strata', 'StrataFactory', function($scope, strata, StrataFactory) {
-        $scope.strata = new StrataFactory(strata);
+    .controller('StrataMainCtrl', ['$scope', 'StrataFactory', function($scope, StrataFactory) {
         
     }])
     
@@ -574,6 +573,8 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
         // init scope
         $scope.strata = new StrataFactory(strata);
+        console.log("$scope.strata:", $scope.strata);
+        
 
         $scope.screenIsMobile = screenSize.is('xs, sm');
         screenSize.on('xs', (isMatch) => {
@@ -587,15 +588,23 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
         $scope.editName = {
             elem: angular.element("#editName"),
-            show: false
+            show: false,
+            beforeDataChange: undefined
+        };
+        $scope.editAddress = {
+            elem: angular.element("#editAddress"),
+            show: false,
+            beforeDataChange: undefined
         };
         $scope.editDesc = {
             elem: angular.element("#editDesc"),
-            show: false
+            show: false,
+            beforeDataChange: undefined
         };
         $scope.editReminder = {
             elem: angular.element("#editReminder"),
-            show: false
+            show: false,
+            beforeDataChange: undefined
         };
 
         /* Functions */
@@ -609,6 +618,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
             if (action == 'show' || action == 'open') {
                 editItem.show = true;
+                editItem.beforeDataChange = angular.copy($scope.strata);
                 // focus input
                 $timeout(e => {
                     editItem.elem.focus();
@@ -616,6 +626,14 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             }
             else if (action == 'close' || action == 'hide' || action == 'dismiss') {
                 editItem.show = false;
+                $scope.strata.address = editItem.beforeDataChange.address;
+                $scope.strata.city = editItem.beforeDataChange.city;
+                $scope.strata.country = editItem.beforeDataChange.country;
+                $scope.strata.desc = editItem.beforeDataChange.desc;
+                $scope.strata.name = editItem.beforeDataChange.name;
+                $scope.strata.postalZip = editItem.beforeDataChange.postalZip;
+                $scope.strata.provState = editItem.beforeDataChange.provState;
+                $scope.strata.reminder = editItem.beforeDataChange.reminder;
             }
             
         };
@@ -631,10 +649,10 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             })
              .$promise
              .then(succ => {
-                $scope.toggleEdit($scope.editName, 'close');
+                $scope.editName.show = false;
              })
              .catch(err => {
-                 $scope.toggleEdit($scope.editName, 'close');
+                $scope.editName.show = false;
              });
         };
 
@@ -650,10 +668,10 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             })
              .$promise
              .then(succ => {
-                $scope.toggleEdit($scope.editDesc, 'close');
+                $scope.editDesc.show = false;
              })
              .catch(err => {
-                 $scope.toggleEdit($scope.editDesc, 'close');
+                $scope.editDesc.show = false;
              });
         };
 
@@ -668,15 +686,85 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             })
              .$promise
              .then(succ => {
-                $scope.toggleEdit($scope.editReminder, 'close');
+                $scope.editReminder.show = false;
              })
              .catch(err => {
-                 $scope.toggleEdit($scope.editReminder, 'close');
+                 $scope.editReminder.show = false;
+             });
+        };
+
+        $scope.submitEditAddressForm = function() {
+            Strata.update({
+                where: {
+                    id:    $scope.strata.id,
+                }
+            }, {
+                address: $scope.strata.address,
+                city: $scope.strata.city,
+                provState: $scope.strata.provState,
+                country: $scope.strata.country,
+                postalZip: $scope.strata.postalZip
+            })
+             .$promise
+             .then(succ => {
+                $scope.editAddress.show = false;
+             })
+             .catch(err => {
+                $scope.editAddress.show = false;
              });
         };
     }])
 
-    .controller('StrataAnnouncementsListCtrl', ['$scope', '$filter', '$stateParams', 'strataAnnouncements', 'AlertService', function($scope, $filter, $stateParams, strataAnnouncements, AlertService) {
+    .controller('StrataAnnouncementCreateCtrl', ['$scope', '$stateParams', '$state', 'StrataAnnouncement', 'StrataAnnouncementInst', function($scope, $stateParams, $state, StrataAnnouncement, StrataAnnouncementInst) {
+        // init scope
+        $scope.announcement = new StrataAnnouncementInst();
+        
+        $scope.dateOptions = {
+            dateDisabled: false,
+            initDate: new Date(),
+            maxDate: new Date(2100, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+        };
+
+        $scope.expDateCalendar = {
+            opened: false
+        };
+
+        /* Functions */
+
+        $scope.openExpDatePicker = function() {
+            $scope.expDateCalendar.opened = true;
+        };
+
+        $scope.submitAnnouncementForm = function() {
+            $scope.formSubmit = true;
+
+            if(angular.isDate($scope.announcement.expDate)) {
+                $scope.announcement.expDate.setHours(0, 0, 0, 0);
+            }
+            
+            StrataAnnouncement.create({
+                id: $scope.announcement.id,
+                title: $scope.announcement.title,
+                desc: $scope.announcement.desc,
+                expDate: $scope.announcement.expDate ? $scope.announcement.expDate.toISOString() : undefined,
+                postToBoard: $scope.announcement.postToBoard ? $scope.announcement.postToBoard : false,
+                strataId: $stateParams.strataId
+            })
+            .$promise
+            .then(succ => {
+                $scope.formSubmit = false;
+                $state.transitionTo('app.strata.main.announcements.list', { strataId: $stateParams.strataId, createAnnouncementSucc: succ.id })
+            })
+            .catch(err => {
+                $scope.formSubmit = false;
+                console.log("err:", err);
+            });
+        };
+    }])
+
+    .controller('StrataAnnouncementListCtrl', ['$scope', '$filter', '$stateParams', 'strataAnnouncements', 'AlertService', function($scope, $filter, $stateParams, strataAnnouncements, AlertService) {
         console.log("strataAnnouncements:", strataAnnouncements);
         // display create success alert
         if ($stateParams.createAnnouncementSucc) {
@@ -725,15 +813,9 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         };
 
         $scope.updatePageSizeLimit = function () {
-            console.log('hiya');
-            console.log("$scope.pageSize:", $scope.pageSize);
-            
             if ($scope.pageSize < 0) {
-                console.log(1);
                 $scope.pageSizeLimit = $scope.getData().length;
             } else {
-                console.log(2);
-                
                 $scope.pageSizeLimit = $scope.pageSize;
             }
         };
@@ -746,57 +828,142 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
         };
     }])
 
-    .controller('StrataAnnouncementsCreateCtrl', ['$scope', function($scope) {
-
-    }])
-
-    .controller('StrataSaveAnnouncementCtrl', ['$scope', '$stateParams', '$state', 'StrataAnnouncement', 'StrataAnnouncementInst', function($scope, $stateParams, $state, StrataAnnouncement, StrataAnnouncementInst) {
+    .controller('StrataAnnouncementViewCtrl', ['$scope', '$rootScope', '$timeout', '$stateParams', 'StrataAnnouncement', 'AnnouncementPost', 'StrataAnnouncementInst', 'announcement', function($scope, $rootScope, $timeout, $stateParams, StrataAnnouncement, AnnouncementPost, StrataAnnouncementInst, announcement) {
         // init scope
-        $scope.announcement = new StrataAnnouncementInst();
+        $scope.announcement = new StrataAnnouncementInst(announcement);
+        console.log("$scope.announcement:", $scope.announcement);
         
-        $scope.dateOptions = {
-            dateDisabled: false,
-            initDate: new Date(),
-            maxDate: new Date(2100, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
+        $scope.editTitle = {
+            elem: angular.element("#editTitle"),
+            show: false,
+            beforeDataChange: undefined
         };
-
-        $scope.expDateCalendar = {
-            opened: false
+        
+        $scope.editDesc = {
+            elem: angular.element("#editDesc"),
+            show: false,
+            beforeDataChange: undefined
         };
-
+        
         /* Functions */
 
-        $scope.openExpDatePicker = function() {
-            $scope.expDateCalendar.opened = true;
+        // toggle edit name
+        $scope.toggleEdit = function(editItem, action, selector) {
+            if (!action) {
+                editItem.show = !editItem.show;
+                return true;
+            }
+
+            if (action == 'show' || action == 'open') {
+                editItem.show = true;
+                
+                // focus input
+                if (selector) {
+                    // editting comment
+                    editItem.beforeDataChange = angular.copy(editItem);
+                    $timeout(e => {
+                        angular.element(selector + editItem.id).focus();
+                    }, 0);
+                } else {
+                    // editing announcement
+                    editItem.beforeDataChange = angular.copy($scope.announcement);
+
+                    $timeout(e => {
+                        editItem.elem.focus();
+                    }, 0);
+                }
+            }
+            else if (action == 'close' || action == 'hide' || action == 'dismiss') {
+                editItem.show = false;
+                
+                // focus input
+                if (selector) {
+                    // editting comment
+                    editItem.text = editItem.beforeDataChange.text;
+                } else {
+                    // editing announcement
+                    $scope.announcement.title = editItem.beforeDataChange.title;
+                }
+            }
+            
         };
 
-        $scope.submitAnnouncementForm = function() {
-            $scope.formSubmit = true;
-
-            StrataAnnouncement.upsert({
-                id: $scope.announcement.id,
-                title: $scope.announcement.title,
-                desc: $scope.announcement.desc,
-                expDate: $scope.announcement.expDate ? $scope.announcement.expDate.toISOString() : undefined,
-                postToBoard: $scope.announcement.postToBoard ? $scope.announcement.postToBoard : false,
-                strataId: $stateParams.strataId
+        // update title
+        $scope.submitEditTitleForm = function() {
+            StrataAnnouncement.update({
+                where: {
+                    id: $scope.announcement.id,
+                }
+            }, {
+                title: $scope.announcement.title
             })
             .$promise
             .then(succ => {
-                $scope.formSubmit = false;
-                $state.transitionTo('app.strata.main.announcements.list', { strataId: $stateParams.strataId, createAnnouncementSucc: succ.id })
+               $scope.editTitle.show = false;
             })
             .catch(err => {
-                $scope.formSubmit = false;
-                console.log("err:", err);
+               $scope.editTitle.show = false;
             });
         };
-        
-        $scope.doSomething = function() {
-            console.log($scope.announcement.expDate)
+
+        // update description
+        $scope.submitEditDescForm = function() {
+            StrataAnnouncement.update({
+                where: {
+                    id: $scope.announcement.id,
+                }
+            }, {
+                desc: $scope.announcement.desc
+            })
+            .$promise
+            .then(succ => {
+               $scope.editDesc.show = false;
+            })
+            .catch(err => {
+               $scope.editDesc.show = false;
+            });
         };
+
+        // Create Post
+        $scope.submitCreatePostForm = function() {
+            $scope.submitCommentCreate = true;
+            
+            AnnouncementPost.create({
+                text: $scope.post,
+                announcementId: $scope.announcement.id,
+                accountId: $rootScope.currentUser.id
+            })
+            .$promise
+            .then(succ => {
+                console.log("succ:", succ);
+                $scope.submitCommentCreate = false;
+            })
+            .catch(err => {
+                console.log("err:", err);
+                $scope.submitCommentCreate = false;
+            });
+        };
+
+        // Edit Post
+        $scope.submitEditPostForm = function(post) {
+            console.log('submitted');
+            
+            AnnouncementPost.update({
+                where: {
+                    id: post.id,
+                }
+            }, {
+                text: post.text
+            })
+            .$promise
+            .then(succ => {
+                post.show = false;
+            })
+            .catch(err => {
+                post.show = false;
+            });
+        };
+
     }])
     
     .controller('StrataMembersCtrl', ['$scope', function($scope) {
