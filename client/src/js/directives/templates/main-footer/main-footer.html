@@ -1,6 +1,49 @@
 <!-- Footer -->
-<footer class="py-5 bg-dark mt-2">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+<footer class="mt-2 bg-light">
+    <!-- <div class='footer-crown'></div> -->
+    <hr>
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <h2 class="page-header">Easy Strata <div class="underline"></div></h2>
+                <ul class='site-map list-unstyled'>
+                    <li><a class="btn-block btn-link lead m-0" ui-sref="app.home"><i class='fas fa-caret-right'></i> Home</a></li>
+                    <li><a class="btn-block btn-link lead m-0" ui-sref="app.services"><i class='fas fa-caret-right'></i> Services</a></li>
+                    <li><a class="btn-block btn-link lead m-0" ui-sref="app.pricing"><i class='fas fa-caret-right'></i> Pricing</a></li>
+                    <li><a class="btn-block btn-link lead m-0" ui-sref="app.login"><i class='fas fa-caret-right'></i> Login</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4"
+                ng-class="{
+                    'order-3': !screenSize.is('xs'),
+                    'text-right': !screenSize.is('xs')
+                }">
+                <h2 class="page-header">Contact Us <div 
+                    ng-class="{
+                        'ml-auto': !screenSize.is('xs')
+                    }" class="underline"></div></h2>
+                <address style='font-size: 18px;'>
+                    <strong class='mb-1'>Easy Strata</strong><br>
+                    P.O Box 7434 Knight Rd,<br>
+                    Chilliwack, BC,<br>
+                    V2R 3C1<br>
+                    <br>
+                    <a href="mailto:info@easystrata.com">info@easystrata.com</a>
+                </address>
+            </div>
+            <div class="col-md-4 offset-lg-1"
+                ng-class="{
+                    'order-2': !screenSize.is('xs')
+                }">
+                <div class="mx-auto mt-5">
+                    <img class="img-fluid" style='width: 100%;' src='/assets/img/logo-text.png' alt="Easy Strata Logo">
+                    <p class="m-0  text-dark text-center">Copyright &copy; Easy Strata {{currentDate | date: 'yyyy'}}</p>
+                    <p class='text-center'>
+                        <small><a ui-sref="app.terms-of-service">Terms of Service</a> / <a ui-sref="app.privacy-policy">Privacy Policy</a></small>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div><!-- /.container -->
 </footer>

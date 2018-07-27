@@ -1,49 +1,64 @@
-<div class="container">
+<div class="container mt-2">
     <!-- Heading Row -->
     <div class="row">
-        <div class="col-lg-8"><img alt="" class="img-fluid rounded" src="http://placehold.it/900x400"></div><!-- /.col-lg-8 -->
+        <div class="col-lg-8">
+            <span class="faded faded-all">
+                <img alt="apartments" class="img-fluid rounded" src="/assets/img/apartments.jpg">
+            </span>
+        </div><!-- /.col-lg-8 -->
         <div class="col-lg-4">
-            <h3>We Help You Manage Your Strata or Home Owners Association</h3>
-            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p><a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+            <h3 class="page-header">We Help You Manage Your Strata <div class="underline"></div></h3>
+            <p>Looking for a way to bring your community together or to help you manage your strata? We can help. We provide the tools that allow run your strata seamlessly. This includes the ability to invite additional strata members by email or text. Send an email blast to all of your members to let them know about an upcoming inspection. Manage your strata council's monthly minutes and distribute them to your community simply. Share files and much more..</p>
+            <a class="btn btn-primary btn-lg" ui-sref="app.services">Learn More <i class='fas fa-angle-double-right'></i></a>
         </div><!-- /.col-md-4 -->
     </div><!-- /.row -->
     <!-- Call to Action Well -->
     <div class="card text-white bg-secondary my-4 text-center">
         <div class="card-body">
-            <p class="text-white m-0"><i class="fas fa-chevron-left"></i> This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+            <p class="text-white m-0"><i class="far fa-star"></i> Get your community involved by providing them a web portal that they can proactively take part in! </p>
         </div>
     </div><!-- Content Row -->
     <div class="row">
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Card One</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <div class="card h-100 shadow bg-white">
+                <div class="card-body pt-0">
+                    <h2 class="card-title page-header">Your Strata <div class="underline"></div></h2>
+                    <p class="card-text"
+                        data-ng-bind="cardOneText"
+                        data-ellipsis
+                        style='max-height: 200px;'>
+                    </p>
                 </div>
-                <div class="card-footer">
-                    <a class="btn btn-primary" href="#">More Info</a>
-                </div>
-            </div>
-        </div><!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Card Two</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-                </div>
-                <div class="card-footer">
-                    <a class="btn btn-primary" href="#">More Info</a>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" ui-sref="app.services">Learn More <i class="fas fa-angle-double-right"></i></i></a>
                 </div>
             </div>
         </div><!-- /.col-md-4 -->
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Card Three</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <div class="card h-100 shadow bg-white">
+                <div class="card-body pt-0">
+                    <h2 class="card-title page-header">Schedule Events <div class="underline"></div></h2>
+                    <p class="card-text"
+                        data-ng-bind="cardTwoText"
+                        data-ellipsis
+                        style='max-height: 200px;'></p>
                 </div>
-                <div class="card-footer">
-                    <a class="btn btn-primary" href="#">More Info</a>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" ui-sref="app.services">Learn More <i class="fas fa-angle-double-right"></i></a>
+                </div>
+            </div>
+        </div><!-- /.col-md-4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow bg-white">
+                <div class="card-body pt-0">
+                    <h2 class="card-title page-header">Stay Organized <div class="underline"></div></h2>
+                    <p class="card-text"
+                        data-ng-bind="cardThreeText"
+                        data-ellipsis
+                        style='max-height: 200px;'></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" ui-sref="app.services">Learn More <i class="fas fa-angle-double-right"></i></a>
                 </div>
             </div>
         </div><!-- /.col-md-4 -->

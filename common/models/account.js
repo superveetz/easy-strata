@@ -27,7 +27,7 @@ module.exports = function(Account) {
         console.log("verifyEmailOptions.logo:", verifyEmailOptions.logo);
         
         verifyEmailOptions.to = accInstance.email;
-        verifyEmailOptions.name = accInstance.firstName + accInstance.lastName;
+        verifyEmailOptions.name = accInstance.firstName + ' ' + accInstance.lastName;
 
         accInstance.verify(verifyEmailOptions, function(err, response) {
             console.log('err: ', err);

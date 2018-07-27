@@ -48,13 +48,13 @@
                     </h3>
 
                     <div class='text-secondary' ng-if="!editAddress.show">
-                        {{strata.address}},<br>
+                        {{strata.address ? strata.address : 'Address'}},<br>
                         <button
                             ng-click="toggleEdit(editAddress, 'show')"
                             type='button' 
                             class='btn text-sm float-right btn-sm btn-warning border-dark'><i class='fas fa-edit'></i> Edit</button>
-                        {{strata.city}}, {{strata.provState}},<br>
-                        {{strata.country}}, {{strata.postalZip}}
+                        {{strata.city ? strata.city : 'City'}}, {{strata.provState ? strata.provState : 'Prov. / State'}},<br>
+                        {{strata.country ? strata.country : 'Country'}}, {{strata.postalZip ? strata.postalZip : 'Postal / Zip'}}
                     </div>
         
                     <form id='editAddressForm'
@@ -233,6 +233,13 @@
                     }"
                     ui-sref='app.strata.main.announcements.create'>Create Announcement <i class='fas fa-angle-double-right'></i></button>
             </div>
+
+            <div class="col-12" ng-if="strata.announcements.length == 0">
+                <div class="alert alert-info">
+                    It appears there are no strata announcements currently
+                </div>
+            </div>
+
             <div class="col-md-4 col-sm-6 mb-4" ng-repeat="announcement in strata.announcements | orderBy:announcement.created track by $index">
                 <div class="card h-100">
                     <div class="card-header">

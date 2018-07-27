@@ -55,6 +55,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
             $scope.navToggled       = !$scope.navToggled;
             angular.element("#wrapper").toggleClass("toggled");
+            angular.element("#main-nav .navbar.fixed-top").toggleClass("show");
         };
 
         // manually open/close side nav
@@ -62,12 +63,14 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             if (action == 'open') {
                 if (!$scope.navToggled) {
                     $scope.navToggled       = !$scope.navToggled;
+                    angular.element("#main-nav .navbar.fixed-top").addClass("show");
                     angular.element("#wrapper").addClass("toggled");
                 }
                 return true;
             } else if (action == 'close') {
                 if ($scope.navToggled) {
                     $scope.navToggled       = !$scope.navToggled;
+                    angular.element("#main-nav .navbar.fixed-top").removeClass("show");
                     angular.element("#wrapper").removeClass("toggled");
                 }
                 return true;
@@ -479,10 +482,17 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
     .controller('HomeCtrl', ['$timeout', '$scope', 'Account', ($timeout, $scope, Account) => {
         $scope.Account = Account; // remove this later
+        $scope.cardOneText = "After you've created your strata, you'll be provided with a main dashboard that you are able to customize to your liking. This dashboard will be the main entry point to your strata so it will be seen by all of your members. We provide you with the tools to invite all of your strata members by email or text message as well as the abilities to customize their roles within your organization (president, secretary, etc).";
+        $scope.cardTwoText = "Want to ensure that everyone is aware of the upcoming fire inspection or AGM meeting? We provide you with the abilities to create announcements which allow your members to RSVP or decline an upcoming event that they may or may not be able to attend. Either way, you'll have the peace of mind knowing who is expected to be home or if alternative arrangements need to be made."
+        $scope.cardThreeText = "You'll likely want to store and share documents such as your minutes, financial reports and any other files that may be pertinent to your strata. You'll also likely want to be able to separate strata council documents from the documents that your home owners can view. We provide you with the abilities to manage your files efficiently so that you don't think twice about it.";
 
         $timeout(() => {
             window.prerenderReady = true;
         }, 500);
+    }])
+
+    .controller('MainFooterCtrl', ['$scope', function($scope) {
+        $scope.currentDate = new Date();
     }])
     
     .controller('MyStrataCtrl', ['$scope', 'Account', 'stratas', 'screenSize', function($scope, Account, stratas, screenSize) {
@@ -755,7 +765,7 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
             .$promise
             .then(succ => {
                 $scope.formSubmit = false;
-                $state.transitionTo('app.strata.main.announcements.list', { strataId: $stateParams.strataId, createAnnouncementSucc: succ.id })
+                $state.transitionTo('app.strata.main.announcements.view', { strataId: $stateParams.strataId, announcementId: succ.id, createAnnouncementSucc: succ.id })
             })
             .catch(err => {
                 $scope.formSubmit = false;
@@ -946,8 +956,6 @@ import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants";
 
         // Edit Post
         $scope.submitEditPostForm = function(post) {
-            console.log('submitted');
-            
             AnnouncementPost.update({
                 where: {
                     id: post.id,

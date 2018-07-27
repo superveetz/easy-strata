@@ -60,7 +60,7 @@
             restrict: 'E',
             replace: true,
             templateUrl: require('./templates/main-footer/main-footer.html'),
-            // controller: 'MainFooterCtrl'
+            controller: 'MainFooterCtrl'
         };
     }])
     

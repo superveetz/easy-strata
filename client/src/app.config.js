@@ -126,6 +126,18 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         title: '404: Page Not Found'
       })
 
+      .state('app.terms-of-service', {
+        url: '/terms-of-service',
+        templateUrl: require('./views/terms-of-service/index.html'),
+        title: 'Terms of Service'
+      })
+
+      .state('app.privacy-policy', {
+        url: '/privacy-policy',
+        templateUrl: require('./views/privacy-policy/index.html'),
+        title: 'Privacy Policy'
+      })
+
       .state('app.my-strata', {
         url: '/my-strata',
         templateUrl: require('./views/my-strata/index.html'),
@@ -159,6 +171,12 @@ const Config = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$l
         },
         title: 'My Strata',
         description: "Strata management software that is easy to use.."
+      })
+
+      .state('app.my-account', {
+        url: '/my-account',
+        templateUrl: require('./views/my-account/index.html'),
+        title: 'My Account'
       })
       
       .state('app.strata', {

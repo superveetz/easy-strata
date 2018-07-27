@@ -177,7 +177,7 @@
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" ui-sref="app.my-profile">
+                                        <a class="dropdown-item" ui-sref="app.my-account">
                                             <div class='row'>
                                                 <div class='col-2 text-right'>
                                                     <span class='fa-stack fa-1x'>
@@ -186,7 +186,7 @@
                                                     </span> 
                                                 </div>
                                                 <div class='col col-auto text-left'>
-                                                <strong class='align-middle'>&nbsp;My Profile</strong>
+                                                <strong class='align-middle'>&nbsp;My Account</strong>
                                                 </div>
                                             </div>
                                         </a>
@@ -239,7 +239,7 @@
                                     
                                     <div class='container'>
                                         
-                                        <a class='nav-link text-dark' ui-sref='app.my-profile'>
+                                        <a class='nav-link text-dark' ui-sref='app.my-account'>
                                             <div class='row'>
                                                 <div class='col-2 offset-1 text-right'>
                                                     <span class='fa-stack fa-1x mt-1'>
@@ -248,7 +248,7 @@
                                                     </span> 
                                                 </div>
                                                 <div class='col col-auto text-left'>
-                                                    <strong class='align-top'>&nbsp;My Profile</strong>
+                                                    <strong class='align-top'>&nbsp;My Account</strong>
                                                 </div>
                                             </div>
                                         </a>

@@ -44,12 +44,15 @@ fontawesome.library.add(brands)
 import '../../node_modules/animate.css/animate.css';
 
 // sass
+import './sass/_text.scss';
 import './sass/_main.scss';
 import './sass/buttons.scss';
 import './sass/main-nav.scss';
 import './sass/account-modal.scss';
 import './sass/pricing.scss';
 import './sass/simple-sidebar.scss';
+import './sass/codepen-fade-border.scss';
+import './sass/footer.scss';
 
 const appname = 'app';  /** App and root module name */
 const deps    = [ /** All global dependencies */
