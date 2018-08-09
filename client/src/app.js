@@ -49,6 +49,7 @@ import './sass/_main.scss';
 import './sass/buttons.scss';
 import './sass/main-nav.scss';
 import './sass/account-modal.scss';
+import './sass/services.scss';
 import './sass/pricing.scss';
 import './sass/simple-sidebar.scss';
 import './sass/codepen-fade-border.scss';

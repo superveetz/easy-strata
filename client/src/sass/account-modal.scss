@@ -29,4 +29,43 @@
             color: white;
         }
     }
+
+    
+.nav-tabs {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+ }
+ .nav-tabs>li {
+     border-left: 1px solid black;
+     border-top: 1px solid black;
+     border-bottom: 1px solid black;
+ }
+ .nav-tabs>li:last-child {
+     border-right: 1px solid black;
+ }
+ .nav-tabs>li>a.active {
+    background-color: dodgerblue;
+ }
+ .nav-tabs>li>a:not(.active) {
+    &:hover {
+        background-color: rgb(9, 77, 144);
+     }
+ }
+ .nav-tabs>li>a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: white !important;
+    background-color: #6daded;
+    border-radius: 0px;
+    padding: 10px 0;
+ }
+//  .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+//     color: black;
+//     cursor: pointer;
+//     background-color: transparent;
+//     border: 1px solid transparent;
+//     border-right: 2px solid white;
+//  }
 }
