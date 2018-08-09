@@ -2,12 +2,14 @@
     z-index: 9000;
 
     .account-modal-header {
-        background-color: red;
         height: 200px;
         width: 100%;
         background-image: url('/assets/img/bg.jpg');
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
+        background-color: black;
+        background-blend-mode: screen;
 
         .key-wrapper {
             border: 2px solid #fff;
